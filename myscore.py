@@ -22,11 +22,13 @@ class Myscorer(UserScorer):
     and a personal keras/tensorflow model
     """
 
-    def __init__(self, checkpoint_path: str, device: str = "cuda:0"):
+    def __init__(self, checkpoint_path: str = None, device: str = "cuda:0"):
         self._checkpoint_path = checkpoint_path
         self._device = device
-        self.emb_model = TransformersApp(device=device)
-        self.model = load_model(checkpoint_path)
+        self.app = TransformersApp(device=device)
+
+        if checkpoint_path is not None:
+            self.model = load_model(checkpoint_path)
 
     @property
     def criteria(self) -> List[str]:
@@ -51,7 +53,6 @@ class Myscorer(UserScorer):
         >> embedding example:
 
         emb_vector = self.emb_model.predict_embedding(sequences)
-        emb_vector = np.array([ev.detach().cpu().numpy() for ev in emb_vector])
 
         >> probabilities prediction (previously train model)
 
