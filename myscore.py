@@ -8,10 +8,9 @@ from typing import Dict, List
 
 import numpy as np
 from deepchainapps.components import TransformersApp
+from deepchainapps.components import  UserScorer
 from tensorflow.keras.models import load_model
 from torch import load
-
-from base_scorer import UserScorer
 
 
 class Myscorer(UserScorer):
@@ -62,10 +61,10 @@ class Myscorer(UserScorer):
 
         scores = [
             {
-                self.criteria[0]: float(np.max(probabilities)),
-                self.criteria[1]: float(np.min(probabilities)),
+                self.criteria[0]: float(np.max(prob)),
+                self.criteria[1]: float(np.min(prob)),
             }
-            for seq, prob in probabilities
+            for prob in probabilities
         ]
 
         return scores
