@@ -7,13 +7,15 @@ WARNINGS: if you run the scorer locally and don't have a GPU
 from typing import Dict, List
 
 import numpy as np
-from deepchainapps.components import TransformersApp
-from deepchainapps.components import  UserScorer
+from deepchainapps.components import TransformersApp, UserScorer
 from tensorflow.keras.models import load_model
 from torch import load
 
+Score = Dict[str, float]
+ScoreList = List[Score]
 
-class Myscorer(UserScorer):
+
+class Scorer(UserScorer):
     """
     Scorer template:
     criteria and compute_score methods are mandatory
@@ -29,8 +31,8 @@ class Myscorer(UserScorer):
         if checkpoint_path is not None:
             self.model = load_model(checkpoint_path)
 
-    @property
-    def criteria(self) -> List[str]:
+    @staticmethod
+    def score_names() -> List[str]:
         """
         Criteria names.
 
@@ -39,9 +41,9 @@ class Myscorer(UserScorer):
          return ["max_probability", "min_probability"]
 
         """
-        return ["max_probability", "min_probability"]
+        return ["loglikelihood"]
 
-    def compute_scores(self, sequences: List[str]) -> List[Dict[str, float]]:
+    def compute_scores(self, sequences: List[str]) -> ScoreList:
         """
         Return a list of all proteins score
         Score must be a list of dict:
@@ -61,8 +63,8 @@ class Myscorer(UserScorer):
 
         scores = [
             {
-                self.criteria[0]: float(np.max(prob)),
-                self.criteria[1]: float(np.min(prob)),
+                self.criteria()[0]: float(np.max(prob)),
+                self.criteria()[1]: float(np.min(prob)),
             }
             for prob in probabilities
         ]
@@ -73,14 +75,8 @@ class Myscorer(UserScorer):
         if not isinstance(sequences, list):
             sequences = [sequences]
 
-        probabilities = self.model.predict(sequences)
+        loglikelihood = self.app.predict_loglikelihood(sequences)
 
-        scores = [
-            {
-                self.criteria[0]: 0,
-                self.criteria[1]: 0,
-            }
-            for _ in probabilities
-        ]
+        scores = [{self.score_names()[0]: ll} for ll in loglikelihood]
 
         return scores
