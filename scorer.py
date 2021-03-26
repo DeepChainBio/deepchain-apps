@@ -6,10 +6,8 @@ WARNINGS: if you run the scorer locally and don't have a GPU
 
 from typing import Dict, List
 
-import numpy as np
 from deepchainapps.components import TransformersApp, UserScorer
 from tensorflow.keras.models import load_model
-from torch import load
 
 Score = Dict[str, float]
 ScoreList = List[Score]
