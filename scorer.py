@@ -21,13 +21,13 @@ class Scorer(UserScorer):
     and a personal keras/tensorflow model
     """
 
-    def __init__(self, checkpoint_path: str = None, device: str = "cuda:0"):
-        self._checkpoint_path = checkpoint_path
+    def __init__(self, device: str = "cuda:0"):
         self._device = device
         self.app = TransformersApp(device=device)
+        self._checkpoint_path = None
 
-        if checkpoint_path is not None:
-            self.model = load_model(checkpoint_path)
+        if self._checkpoint_path is not None:
+            self.model = load_model(self._checkpoint_path)
 
     @staticmethod
     def score_names() -> List[str]:
