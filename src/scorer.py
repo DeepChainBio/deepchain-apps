@@ -4,7 +4,8 @@ WARNINGS: if you run the scorer locally and don't have a GPU
 """
 
 
-from typing import Dict, List
+from pathlib import Path
+from typing import Dict, List, Optional
 
 from deepchainapps.components import TransformersApp, UserScorer
 from tensorflow.keras.models import load_model
@@ -24,10 +25,13 @@ class Scorer(UserScorer):
     def __init__(self, device: str = "cuda:0"):
         self._device = device
         self.app = TransformersApp(device=device)
-        self._checkpoint_path = None
 
-        if self._checkpoint_path is not None:
-            self.model = load_model(self._checkpoint_path)
+        self._checkpoint_filename: Optional[str] = None
+        # Make sure to put your checkpoint file in your_app/checkpoint folder
+        checkpoint_dir = (Path(__file__).parent / "../checkpoint").resolve()
+
+        if self._checkpoint_filename is not None:
+            self.model = load_model(str(checkpoint_dir / self._checkpoint_filename))
 
     @staticmethod
     def score_names() -> List[str]:
