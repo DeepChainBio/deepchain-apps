@@ -26,17 +26,24 @@ class Scorer(UserScorer):
         self._device = device
         self.app = TransformersApp(device=device)
 
-        self._checkpoint_filename: Optional[str] = None
+        # FILL IN
         # Make sure to put your checkpoint file in your_app/checkpoint folder
-        checkpoint_dir = (Path(__file__).parent / "../checkpoint").resolve()
+        self._checkpoint_filename: Optional[str] = None
 
+        # Use load_model for tensorflow/keras model
+        # Use load for pytorch model
         if self._checkpoint_filename is not None:
-            self.model = load_model(str(checkpoint_dir / self._checkpoint_filename))
+            self.model = load_model(self.get_checkpoint_path())
+
+    def get_checkpoint_path(self) -> str:
+        """Return solve checkpoint model path"""
+        checkpoint_dir = (Path(__file__).parent / "../checkpoint").resolve()
+        return str(checkpoint_dir / self._checkpoint_filename)
 
     @staticmethod
     def score_names() -> List[str]:
         """
-        Criteria names.
+        Criteria names. Must be specified
 
         Example:
 
