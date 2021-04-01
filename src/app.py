@@ -14,7 +14,7 @@ Score = Dict[str, float]
 ScoreList = List[Score]
 
 
-class Scorer(UserScorer):
+class App(UserScorer):
     """
     Scorer template:
     criteria and compute_score methods are mandatory
