@@ -46,7 +46,7 @@ class App(DeepChainApp):
         Example:
          return ["max_probability", "min_probability"]
         """
-        return ["probabilities"]
+        return ["loglikelihood"]
 
     def compute_scores(self, sequences: List[str]) -> ScoreList:
         """
@@ -54,16 +54,25 @@ class App(DeepChainApp):
         Score must be a list of dict:
                 - element of list is protein score
                 - key of dict are score_names
+
+        Example:
+            Calculate embeddings with the pre-trained transformer
+            >> embeddings = self.transformer.predict_embedding(sequences)
         """
         if not isinstance(sequences, list):
             sequences = [sequences]
 
-        # Calculate embeddings with the pre-trained transformer
-        embeddings = self.transformer.predict_embedding(sequences)
+        # Calculate Loglikelihood
+        loglikelihoods = self.transformer.predict_loglikelihood(sequences)
 
-        # Calculate model prediction
-        scores = self.model.predict(embeddings)
-
-        probabilities = [{self.score_names()[0]: prob} for prob in scores]
+        probabilities = [{self.score_names()[0]: log} for log in loglikelihoods]
 
         return probabilities
+
+
+if __name__ == "__main__":
+
+    sequences = ["AAEEERERE", "EDCDEFEAA"]
+    app = App("cpu")
+    scores = app.compute_scores(sequences)
+    print(scores)
