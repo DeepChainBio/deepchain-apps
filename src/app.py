@@ -7,7 +7,7 @@ WARNINGS: if you run the app locally and don't have a GPU
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from deepchainapps.components import DeepChainApp, TransformersApp
+from deepchainapps.components import DeepChainApp, Transformers
 from tensorflow.keras.models import load_model
 
 Score = Dict[str, float]
@@ -24,7 +24,7 @@ class App(DeepChainApp):
 
     def __init__(self, device: str = "cuda:0"):
         self._device = device
-        self.transformer = TransformersApp(device=device)
+        self.transformer = Transformers(device=device)
 
         # Make sure to put your checkpoint file in your_app/checkpoint folder
         self._checkpoint_filename: Optional[str] = None
@@ -65,9 +65,9 @@ class App(DeepChainApp):
         # Calculate Loglikelihood
         loglikelihoods = self.transformer.predict_loglikelihood(sequences)
 
-        probabilities = [{self.score_names()[0]: log} for log in loglikelihoods]
+        log_list = [{self.score_names()[0]: log} for log in loglikelihoods]
 
-        return probabilities
+        return log_list
 
 
 if __name__ == "__main__":
