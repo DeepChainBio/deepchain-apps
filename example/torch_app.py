@@ -78,7 +78,10 @@ class App(DeepChainApp):
 
 if __name__ == "__main__":
 
-    sequences = ["AAEEERERE", "EDCDEFEAA"]
+    sequences = [
+        "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG",
+        "KALTARQQEVFDLIRDHISQTGMPPTRAEIAQRLGFRSPNAAEEHLKALARKGVIEIVSGASRGIRLLQEE",
+    ]
     app = App("cpu")
     scores = app.compute_scores(sequences)
     print(scores)

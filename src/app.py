@@ -64,7 +64,6 @@ class App(DeepChainApp):
 
         # Calculate Loglikelihood
         loglikelihoods = self.transformer.predict_loglikelihood(sequences)
-
         log_list = [{self.score_names()[0]: log} for log in loglikelihoods]
 
         return log_list
@@ -72,7 +71,10 @@ class App(DeepChainApp):
 
 if __name__ == "__main__":
 
-    sequences = ["AAEEERERE", "EDCDEFEAA"]
+    sequences = [
+        "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG",
+        "KALTARQQEVFDLIRDHISQTGMPPTRAEIAQRLGFRSPNAAEEHLKALARKGVIEIVSGASRGIRLLQEE",
+    ]
     app = App("cpu")
     scores = app.compute_scores(sequences)
     print(scores)
