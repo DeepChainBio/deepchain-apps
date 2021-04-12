@@ -4,7 +4,7 @@
 </p>
 
 # Description
-Template for creating a personnal application on deepchain.bio platform
+DeepChain apps is a collaborative framework that allows the user to create scorers to evaluate protein sequences. These scorers can be either Classifiers or Predictors. This template is for creating a personnal application to deploy on deepchain.bio.
 
 ## Getting started with App
 
