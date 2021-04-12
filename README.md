@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="./.docs/source/_static/logo-instadeep-longeur.png">
+  <img width="50%" src="./.docs/source/_static/logo-instadeep-longeur.png">
 </p>
 
 # Description
