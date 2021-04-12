@@ -1,7 +1,9 @@
 """
 Module that provide a classifier template to train a model on embeddings.
-With use the pathogen vs human dataset as an example. The embedding of 100k proteins come from the protBert model.
-The model is built with pytorch_ligthning, a wrapper on top of pytorch (similar to keras with tensorflow)
+With use the pathogen vs human dataset as an example. The embedding of 100k proteins come 
+from the protBert model.
+The model is built with pytorch_ligthning, a wrapper on top of 
+pytorch (similar to keras with tensorflow)
 Feel feel to build you own model if you want to build a more complex one
 """
 

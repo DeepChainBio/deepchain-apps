@@ -38,7 +38,14 @@ class App(DeepChainApp):
     def get_checkpoint_path(self) -> str:
         """Return solve checkpoint model path"""
         checkpoint_dir = (Path(__file__).parent / "../checkpoint").resolve()
-        return str(checkpoint_dir / self._checkpoint_filename)
+        path_filename = checkpoint_dir / self._checkpoint_filename
+
+        if not path_filename.is_file():
+            raise FileExistsError(
+                f"File {self._checkpoint_filename} not found in checkpoint folder."
+                f" Set 'self._checkpoint_filename=None' if file not exists"
+            )
+        return path_filename
 
     @staticmethod
     def score_names() -> List[str]:
