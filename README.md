@@ -1,3 +1,4 @@
+![Instadeep logo](./docs/static/logo-instadeep-longeur.png)
 # Template for creating a personnal application on deepchain.bio plateform
 
 ## Getting started with App
