@@ -69,7 +69,7 @@ The application will be deploy in DeepChain plateform.
 Some embeddings are provided in the `Transformers` module
 
 ```
-from deepchainapps.components import Transformers
+from deepchain.components import Transformers
 ```
 
 The model are furnished, but not mandatory, if you want to make an embedding of your protein sequence.

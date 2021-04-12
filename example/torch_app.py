@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 import torch
-from deepchainapps.components import DeepChainApp, Transformers
+from deepchain.components import DeepChainApp, Transformers
 from torch import load
 
 Score = Dict[str, float]

@@ -7,7 +7,7 @@ WARNINGS: if you run the app locally and don't have a GPU
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from deepchainapps.components import DeepChainApp, Transformers
+from deepchain.components import DeepChainApp, Transformers
 from tensorflow.keras.models import load_model
 
 Score = Dict[str, float]
