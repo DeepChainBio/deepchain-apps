@@ -31,8 +31,8 @@ test_dataloader = dataloader_from_numpy(X_val, y_val, batch_size=32)
 #               Trainer(gpus=-1, auto_select_gpus=False, max_epochs=20)
 
 mlp = MLP(input_shape=X_train.shape[1])
-mlp.fit(train_dataloader)
-mld.save_model("model.pt")
+mlp.fit(train_dataloader, epochs=5)
+mlp.save_model("model.pt")
 
 # Model evaluation
 prediction, truth = model_evaluation_accuracy(test_dataloader, mlp)

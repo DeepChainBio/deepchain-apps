@@ -6,7 +6,7 @@
 # Description
 DeepChain apps is a collaborative framework that allows the user to create scorers to evaluate protein sequences. These scorers can be either Classifiers or Predictors. This template is for creating a personnal application to deploy on deepchain.bio.
 
-## Getting started with App
+## App structure
 
 This template provide an example of application that you can submit.
 The final app must have the following architecture:
@@ -20,8 +20,18 @@ The final app must have the following architecture:
 
 The main app class must be named ’App’
 
-## CLI
+## Installation
+It is recommmanded to work with conda environnements in order to manage the specific dependencies of the package.
+```
+  conda create --name deepchain-env python=3.7 -y 
+  conda activate deepchain-env
+  pip install deepchain-apps
+```
 
+
+# Getting started
+
+##  CLI
 The CLI provides 4 main commands:
 
 - **login** : you need to supply the token provide on the platform (PAT: personnal access token).
@@ -74,13 +84,8 @@ The application will be deploy in DeepChain platform.
 
 Some embeddings are provided in the `Transformers` module
 
-<<<<<<< HEAD
 ```
 from deepchain.components import Transformers
-=======
-```python
-from deepchainapps.components import Transformers
->>>>>>> f5fd7e2f740a3db470c5e303496c9e7fd1bcb4e6
 ```
 
 The model are furnished, but not mandatory, if you want to make an embedding of your protein sequence.
@@ -96,3 +101,5 @@ Here for some full details of the architecture (https://github.com/facebookresea
 - 'esm1_t34_670M_UR50S'
 
 !! The embedding will run on a GPU on the platform. But for a testing phase on your personal computer (CPU), you should choose the smaller architecture.
+
+## License
