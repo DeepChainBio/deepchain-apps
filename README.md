@@ -1,4 +1,10 @@
-# Template for creating a personnal application on deepchain.bio plateform
+
+<p align="center">
+  <img width="50%" src="./.docs/source/_static/logo-instadeep-longeur.png">
+</p>
+
+# Description
+DeepChain apps is a collaborative framework that allows the user to create scorers to evaluate protein sequences. These scorers can be either Classifiers or Predictors. This template is for creating a personnal application to deploy on deepchain.bio.
 
 ## Getting started with App
 
@@ -18,7 +24,7 @@ The main app class must be named ’App’
 
 The CLI provides 4 main commands:
 
-- **login** : you need to supply the token provide on the plateform (PAT: personnal access token).
+- **login** : you need to supply the token provide on the platform (PAT: personnal access token).
 
   ```
   deepchain login
@@ -30,7 +36,7 @@ The CLI provides 4 main commands:
   deepchain create my_application
   ```
 
-- **deploy** : the code and checkpoint are deployed on the plateform, you can select your app in the interface on the plateform.
+- **deploy** : the code and checkpoint are deployed on the platform, you can select your app in the interface on the platform.
   - with checkpoint upload
 
     ```
@@ -62,14 +68,19 @@ The CLI provides 4 main commands:
     deepchain apps --delete my_application
     ```
 
-The application will be deploy in DeepChain plateform.
+The application will be deploy in DeepChain platform.
 
 ## Embedding
 
 Some embeddings are provided in the `Transformers` module
 
+<<<<<<< HEAD
 ```
 from deepchain.components import Transformers
+=======
+```python
+from deepchainapps.components import Transformers
+>>>>>>> f5fd7e2f740a3db470c5e303496c9e7fd1bcb4e6
 ```
 
 The model are furnished, but not mandatory, if you want to make an embedding of your protein sequence.
@@ -84,4 +95,4 @@ Here for some full details of the architecture (https://github.com/facebookresea
 - 'esm1_t34_670M_UR50D'
 - 'esm1_t34_670M_UR50S'
 
-!! The embedding will run on a GPU on the plateform. But for a testing phase on your personal computer (CPU), you should choose the smaller architecture.
+!! The embedding will run on a GPU on the platform. But for a testing phase on your personal computer (CPU), you should choose the smaller architecture.
