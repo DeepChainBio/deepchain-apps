@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 #model checkpoint
-.pt
+*.pt
