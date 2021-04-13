@@ -6,10 +6,10 @@
 # Description
 DeepChain apps is a collaborative framework that allows the user to create scorers to evaluate protein sequences. These scorers can be either Classifiers or Predictors. 
 
-This github is hosting a template for creating a personnal application to deploy on deepchain.bio. The main deepchain-apps package can be found on pypi.
+This github is hosting a template for creating a personal application to deploy on deepchain.bio. The main deepchain-apps package can be found on pypi.
 
 ## Installation
-It is recommmanded to work with conda environnements in order to manage the specific dependencies of the package.
+It is recommended to work with conda environnements in order to manage the specific dependencies of the package.
 ```bash
   conda create --name deepchain-env python=3.7 -y 
   conda activate deepchain-env
