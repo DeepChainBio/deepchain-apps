@@ -17,13 +17,13 @@ It is recommmanded to work with conda environnements in order to manage the spec
 ```
 
 # How it works
-Some command are provided in order to create and deploy an application. Below are the main command that should be used in a terminal:
+Some command are provided in order to create and deploy an application. Below are the main commands that should be used in a terminal:
 
 ```
 deepchain login
 deepchain create myapplication
 ```
-The last command will download the github files inside the myapplication folder.
+The last command will download the github files inside the **myapplication** folder.
 
 You can modify the app.py file, as explain in the [Deechain-apps templates](#deepchain-apps-templates)
 
@@ -72,6 +72,10 @@ One dictionnary for each proteins that are scored. Each keys of the dictionnary 
 ```
 
 ### Neural Network scorer
+An example of training with an embedding is provided in the example/torch_classifier.py script.
+
+Be careful, you must use the same embedding for the training and the ```compute_scores()``` method.
+
 
 ```python
 from pathlib import Path
@@ -141,9 +145,9 @@ class App(DeepChainApp):
         return prob_list
 ```
 
-# Getting started with deepchain-apps CLI
+# Getting started with deepchain-apps 
 
-##  Command
+##  CLI
 The CLI provides 4 main commands:
 
 - **login** : you need to supply the token provide on the platform (PAT: personnal access token).
@@ -201,7 +205,7 @@ from deepchain.components import Transformers
 ```
 
 The model are furnished, but not mandatory, if you want to make an embedding of your protein sequence.
-Only the ESM (evolutionary scale modeling) model is provided, with different architecture.
+The ESM (evolutionary scale modeling) and protBert models are provided, with different architecture.
 Here for some full details of the architecture (https://github.com/facebookresearch/esm)
 
 - 'esm1_t6_43M_UR50S'
