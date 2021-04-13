@@ -206,7 +206,7 @@ from deepchain.components import Transformers
 
 The model are furnished, but not mandatory, if you want to make an embedding of your protein sequence.
 The ESM (evolutionary scale modeling) and protBert models are provided, with different architecture.
-Here for some full details of the architecture (https://github.com/facebookresearch/esm)
+Here for some full details of the architecture [esm](https://github.com/facebookresearch/esm) or [protbert](https://huggingface.co/Rostlab/prot_bert)
 
 - 'esm1_t6_43M_UR50S'
 - 'esm1_t12_85M_UR50S'
