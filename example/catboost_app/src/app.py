@@ -1,6 +1,7 @@
-"""Template file to develop personal app
-WARNINGS: if you run the app locally and don't have a GPU
-          you should choose device='cpu'
+"""
+CatBoost implementaton of binding energy scorer
+The model scores the binding energy per position in the receptor binding domain of proteins.
+By Matthew Baas and Kevin Eloff
 """
 
 
@@ -20,10 +21,8 @@ WITH_BIGRAM_O1 = True
 
 class CatboostAntibodyApp(DeepChainApp):
     """
-    DeepChain App template:
-    Implement score_names() and compute_score() methods.
-    Choose a a transformer available on DeepChain
-    Choose a personal keras/tensorflow model
+    DeepChain App:
+    CatBoost antibody app implementation
     """
 
     def __init__(self, device: str = "cuda:0"):
@@ -51,22 +50,17 @@ class CatboostAntibodyApp(DeepChainApp):
     @staticmethod
     def score_names() -> List[str]:
         """
-        App Score Names. Must be specified
-        Example:
-         return ["max_probability", "min_probability"]
+        Return a list of app score names
         """
-        return ["binding_energy"]
+        return ["binding energy"]
 
     def compute_scores(self, sequences: List[str]) -> ScoreList:
         """
         Return a list of all proteins score
-        Score must be a list of dict:
+        Score is a list of dict:
                 - element of list is protein score
                 - key of dict are score_names
-
-        Example:
-            Calculate embeddings with the pre-trained transformer
-            >> embeddings = self.transformer.predict_embedding(sequences)
+        sequence must be 221 length proteins
         """
         if not isinstance(sequences, list):
             sequences = [sequences]
@@ -103,16 +97,8 @@ class CatboostAntibodyApp(DeepChainApp):
 if __name__ == "__main__":
 
     sequences = [
-        ("MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG"
-         "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG"
-         "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG"
-         "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG"
-        )[:221],
-        ("MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG"
-         "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG"
-         "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG"
-         "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG"
-        )[:221],
+        ("QVMLKESGPGLVAPSGSLSITCTVLGFLLDSNGVHWVRQPPGKGLEWLGVIWAGGNTNYNSALMSRVSISKDNSKAQVFLKMKSLQTDDTANYYCARDFYAYDYFYYAMDYWGQGTSVTVSSAFTTPPSVYPLAPGSAAQTNSMVTLGCLVKGYFPEPVTVTWNSGSLSSGVHTFPAVLQSDLYTLSSSVTVPSSTWPSETVTCNVAHPASSTKVDKKIVP"),
+        ("QVQLKESGPGLVAPQQSLSITCTVSGFLLGTNGVHWVRQPPGKGLEWLGVIWAGGISNYNSALMSRVSISKDNSKSQVFLNMKSLQTDDTAMYYCARDFYDYDVFYYAMDYWGQGTSVTVSSAKTTPPSVYPLAPGSAAQTNSMVTLGCLVKGYFPEPVTVTWNSGSLSSGVHTFPAVLQSDLYTLSSSVTVPSSTWPSETVTCNVAHPASSTKVDKKIVP"),
     ]
     app = App("cpu")
     scores = app.compute_scores(sequences)
