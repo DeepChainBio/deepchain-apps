@@ -1,7 +1,5 @@
 
-<p align="center">
-  <img width="50%" src="./.docs/source/_static/logo-instadeep-longeur.png">
-</p>
+<p align="center"><img width="50%" src="./.docs/source/_static/logo-instadeep-longeur.png"></p>
 
 # Description
 DeepChain apps is a collaborative framework that allows the user to create scorers to evaluate protein sequences. These scorers can be either Classifiers or Predictors. 

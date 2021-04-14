@@ -3,12 +3,10 @@ WARNINGS: if you run the app locally and don't have a GPU
           you should choose device='cpu'
 """
 
-
-from pathlib import Path
 from typing import Dict, List, Optional
 
 from deepchain.components import DeepChainApp, Transformers
-from tensorflow.keras.models import load_model
+from torch import load
 
 Score = Dict[str, float]
 ScoreList = List[Score]
@@ -26,13 +24,14 @@ class App(DeepChainApp):
         self._device = device
         self.transformer = Transformers(device=device)
 
+        # TODO  FILL _checkpoint_filename if needed
         # Make sure to put your checkpoint file in your_app/checkpoint folder
         self._checkpoint_filename: Optional[str] = None
 
-        # Use load_model for tensorflow/keras model
-        # Use load for pytorch model
+        # TODO  Use proper loading function
+        # load_model for tensorflow/keras model - load for pytorch model
         if self._checkpoint_filename is not None:
-            self.model = load_model(self.get_checkpoint_path(__file__))
+            self.model = load(self.get_checkpoint_path(__file__))
 
     @staticmethod
     def score_names() -> List[str]:
@@ -41,6 +40,7 @@ class App(DeepChainApp):
         Example:
          return ["max_probability", "min_probability"]
         """
+        # TODO : Put your own score_names here
         return ["loglikelihood"]
 
     def compute_scores(self, sequences: List[str]) -> ScoreList:
@@ -54,10 +54,12 @@ class App(DeepChainApp):
             Calculate embeddings with the pre-trained transformer
             >> embeddings = self.transformer.predict_embedding(sequences)
         """
+
+        # TODO : Fill with you own score function
+
         if not isinstance(sequences, list):
             sequences = [sequences]
 
-        # Calculate Loglikelihood
         loglikelihoods = self.transformer.predict_loglikelihood(sequences)
         log_list = [{self.score_names()[0]: log} for log in loglikelihoods]
 
