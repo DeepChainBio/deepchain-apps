@@ -18,7 +18,7 @@ ScoreList = List[Score]
 WITH_BIGRAM = True
 WITH_BIGRAM_O1 = True
 
-class CatboostAntibodyApp(DeepChainApp):
+class App(DeepChainApp):
     """
     DeepChain App template:
     Implement score_names() and compute_score() methods.

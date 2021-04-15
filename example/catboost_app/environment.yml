@@ -40,7 +40,7 @@ dependencies:
     - attrs==20.3.0
     - cachetools==4.2.1
     - chardet==4.0.0
-    - deepchain-apps==0.0.23
+    - deepchain-apps==0.0.24
     - fair-esm==0.3.1
     - fsspec==0.9.0
     - future==0.18.2
@@ -83,4 +83,4 @@ dependencies:
     - werkzeug==1.0.1
     - wrapt==1.12.1
     - yarl==1.6.3
-prefix: /envs/deepchain-env
+prefix: /deepchain-env
