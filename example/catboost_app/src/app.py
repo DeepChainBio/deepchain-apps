@@ -13,6 +13,9 @@ from tensorflow.keras.models import load_model
 from catboost import CatBoostRegressor, Pool
 import numpy as np
 
+from os import path
+import urllib
+
 Score = Dict[str, float]
 ScoreList = List[Score]
 
@@ -42,9 +45,16 @@ class App(DeepChainApp):
         self.i2i_bigram = np.arange(len(self.i2s)**2).reshape((len(self.i2s), len(self.i2s))) 
 
         # Make sure to put your checkpoint file in your_app/checkpoint folder
-        self._checkpoint_filename: Optional[str] = "catboost_fs12.cat"
+        self._checkpoint_filename: Optional[str] = "model.cat"
 
         if self._checkpoint_filename is not None:
+            # Download model if missing from checkpoint folder.
+            if not path.exists(Path('../checkpoint')/f'{self._checkpoint_filename}'):
+                urllib.request.urlretrieve(
+                    "https://github.com/KevinEloff/deep-chain-apps/releases/download/1.0.0/model.cat",
+                    Path('../checkpoint')/f'{self._checkpoint_filename}'
+                )
+
             self.model.load_model(self.get_checkpoint_path(__file__))
 
     @staticmethod
@@ -66,7 +76,6 @@ class App(DeepChainApp):
             sequences = [sequences]
 
         for seq in sequences:
-            print(len(seq))
             if len(seq) != 221: raise AssertionError("Only sequences of length 221 allowed for this model")
 
         test_data = np.stack([self._preprocess_seq(s) for s in sequences], axis=0)
