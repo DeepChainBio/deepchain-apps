@@ -49,10 +49,10 @@ class App(DeepChainApp):
 
         if self._checkpoint_filename is not None:
             # Download model if missing from checkpoint folder.
-            if not path.exists(Path('../checkpoint')/f'{self._checkpoint_filename}'):
+            if not path.exists(Path(__file__).parent/'..'/'checkpoint'/f'{self._checkpoint_filename}'):
                 urllib.request.urlretrieve(
                     "https://github.com/KevinEloff/deep-chain-apps/releases/download/1.0.0/model.cat",
-                    Path('../checkpoint')/f'{self._checkpoint_filename}'
+                    Path(__file__).parent/'..'/'checkpoint'/f'{self._checkpoint_filename}'
                 )
 
             self.model.load_model(self.get_checkpoint_path(__file__))
