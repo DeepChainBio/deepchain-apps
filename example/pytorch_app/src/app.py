@@ -1,5 +1,5 @@
 """
-CatBoost implementaton of binding energy scorer
+PyTorch implementaton of binding energy scorer
 The model scores the binding energy per position in the receptor binding domain of proteins.
 By Matthew Baas and Kevin Eloff
 """
@@ -27,7 +27,7 @@ WITH_BIGRAM_O1 = True
 class App(DeepChainApp):
     """
     DeepChain App:
-    CatBoost antibody app implementation
+    PyTorch antibody app implementation
     """
 
     def __init__(self, device: str = "cuda:0"):
@@ -68,7 +68,7 @@ class App(DeepChainApp):
         if not isinstance(sequences, list):
             sequences = [sequences]
 
-        test_data = np.stack([self._preprocess_seq(s) for s in sequences], axis=0)
+        test_data = [self._preprocess_seq(s) for s in sequences]
         test_preds = []
         for item in test_data:
             with torch.no_grad(): test_preds.append(self.model(torch.tensor(item[None], device=self._device)).item())
