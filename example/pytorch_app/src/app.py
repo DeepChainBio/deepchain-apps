@@ -109,7 +109,9 @@ class Model(nn.Module):
         self.BiLSTM = nn.LSTM(128*3, 256, num_layers=3, batch_first=True, bidirectional=True)
 
         self.conv_full = nn.Sequential(nn.Conv1d(128*3, 128, 3, stride=1),
+                                       nn.SELU(),
                                        nn.Conv1d(128, 128, 3, stride=1),
+                                       nn.SELU(),
                                        nn.Conv1d(128, 256, 3, stride=1),
                                        nn.SELU())
         
