@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img width="60%" src="./.docs/source/_static/deepchain.png">
+  <img width="50%" src="./.docs/source/_static/deepchain.png">
 </p>
 
 # Description
