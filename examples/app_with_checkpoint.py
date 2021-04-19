@@ -27,12 +27,13 @@ class App(DeepChainApp):
         self._device = device
         self.transformer = Transformers(device=device, model_type="esm1_t6_43M_UR50S")
 
-        # TODO  FILL _checkpoint_filename if needed
+        # TODO: fill _checkpoint_filename if needed
         # Make sure to put your checkpoint file in your_app/checkpoint folder
         self._checkpoint_filename: Optional[str] = "model.pt"
 
-        # TODO  Use proper loading function
-        # load_model for tensorflow/keras model - load for pytorch model
+        # TODO:  Use proper loading function
+        #        load_model for tensorflow/keras model
+        #        load for pytorch model
         if self._checkpoint_filename is not None:
             self.model = load(self.get_checkpoint_path(__file__))
 
@@ -44,7 +45,7 @@ class App(DeepChainApp):
         Example:
          return ["max_probability", "min_probability"]
         """
-        # TODO : Put your own score_names here
+        # TODO: Put your own score_names here
         return ["probability"]
 
     def compute_scores(self, sequences: List[str]) -> ScoreList:
@@ -60,8 +61,15 @@ class App(DeepChainApp):
             -- Get available embedding with :
                 >> transformer.list_esm_backend()
                 >> embeddings = self.transformer.predict_embedding(sequences)
+
+
+        Args:
+            sequences (List[str]): [description]
+
+        Returns:
+            ScoreList: [description]
         """
-        # TODO : Fill with you own score function
+        # TODO: Fill with you own score function
 
         if not isinstance(sequences, list):
             sequences = [sequences]

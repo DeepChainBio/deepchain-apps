@@ -24,12 +24,13 @@ class App(DeepChainApp):
         self._device = device
         self.transformer = Transformers(device=device)
 
-        # TODO  FILL _checkpoint_filename if needed
+        # TODO: fill _checkpoint_filename if needed
         # Make sure to put your checkpoint file in your_app/checkpoint folder
         self._checkpoint_filename: Optional[str] = None
 
-        # TODO  Use proper loading function
-        # load_model for tensorflow/keras model - load for pytorch model
+        # TODO:  Use proper loading function
+        #        load_model for tensorflow/keras model
+        #        load for pytorch model
         if self._checkpoint_filename is not None:
             self.model = load(self.get_checkpoint_path(__file__))
 
