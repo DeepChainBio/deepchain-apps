@@ -78,18 +78,18 @@ class App(DeepChainApp):
         return pred_list
 
     def _preprocess_seq(self, sequence: str) -> np.ndarray:
+        # Amino acids as IDs
         full_cdr = list(sequence)
         full_cdr = [self.s2i[c] for c in full_cdr]
         
-        if WITH_BIGRAM:
-            fr = np.array(full_cdr)
-            fr_r = np.roll(fr, 1)
-            bigrams = self.i2i_bigram[fr, fr_r].tolist()
-        else: bigrams = []
-        if WITH_BIGRAM_O1:
-            fr_r2 = np.roll(fr, 2)
-            bigrams_o1 = self.i2i_bigram[fr, fr_r2].tolist()
-        else: bigrams_o1 = []
+        # Amino acid bigrams as IDs
+        fr = np.array(full_cdr)
+        fr_r = np.roll(fr, 1) # shift sequence by 1
+        bigrams = self.i2i_bigram[fr, fr_r].tolist() # combine with shifted sequence 
+        
+        # Offset amino acids as bigrams
+        fr_r2 = np.roll(fr, 2) # shift sequence by 2
+        bigrams_o1 = self.i2i_bigram[fr, fr_r2].tolist() # combine with double shifted sequence
         
         inference_item = np.array([
             full_cdr, 
@@ -109,7 +109,9 @@ class Model(nn.Module):
         self.BiLSTM = nn.LSTM(128*3, 256, num_layers=3, batch_first=True, bidirectional=True)
 
         self.conv_full = nn.Sequential(nn.Conv1d(128*3, 128, 3, stride=1),
+                                       nn.SELU(),
                                        nn.Conv1d(128, 128, 3, stride=1),
+                                       nn.SELU(),
                                        nn.Conv1d(128, 256, 3, stride=1),
                                        nn.SELU())
         
