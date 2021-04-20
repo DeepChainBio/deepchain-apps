@@ -1,6 +1,6 @@
-'tags': {
-	'tasks': [],
-	'libraries': [],
-	'embeddings': [],
-	'datasets': []
+{
+'tasks': [],
+'libraries': [],
+'embeddings': [],
+'datasets': []
 }
