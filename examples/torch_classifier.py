@@ -7,7 +7,7 @@ pytorch (similar to keras with tensorflow)
 Feel feel to build you own model if you want to build a more complex one
 """
 
-from deepchain.dataset import load_pathogen_dataset
+from biodatasets import list_datasets, load_dataset
 from deepchain.models import MLP
 from deepchain.models.utils import (
     confusion_matrix_plot,
@@ -17,8 +17,11 @@ from deepchain.models.utils import (
 from sklearn.model_selection import train_test_split
 
 # Load embedding and target dataset
-X, y = load_pathogen_dataset()
-X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.3)
+pathogen = load_dataset("pathogen")
+_, y = pathogen.to_npy_arrays(input_names=["sequence"], target_names=["class"])
+embeddings = pathogen.get_embeddings("sequence", "protbert", "cls")
+
+X_train, X_val, y_train, y_val = train_test_split(embeddings, y[0], test_size=0.3)
 
 train_dataloader = dataloader_from_numpy(X_train, y_train, batch_size=32)
 test_dataloader = dataloader_from_numpy(X_val, y_val, batch_size=32)

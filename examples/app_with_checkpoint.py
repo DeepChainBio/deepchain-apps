@@ -8,9 +8,8 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 import torch
-from deepchain.components import DeepChainApp
 from biotransformers import BioTransformers
-
+from deepchain.components import DeepChainApp
 from torch import load
 
 Score = Dict[str, float]
@@ -27,7 +26,7 @@ class App(DeepChainApp):
 
     def __init__(self, device: str = "cuda:0"):
         self._device = device
-        self.transformer = BioTransformers(model_dir="Rostlab/prot_bert")
+        self.transformer = BioTransformers(backend="protbert", device=device)
         # TODO: fill _checkpoint_filename if needed
         # Make sure to put your checkpoint file in your_app/checkpoint folder
         self._checkpoint_filename: Optional[str] = "model.pt"
@@ -65,17 +64,17 @@ class App(DeepChainApp):
 
 
         Args:
-            sequences (List[str]): [description]
+            sequences (List[str]): List of proteins (str)
 
         Returns:
-            ScoreList: [description]
+            ScoreList: List of score (dictionnary with score_name as key)
         """
         # TODO: Fill with you own score function
 
         if not isinstance(sequences, list):
             sequences = [sequences]
 
-        x_embedding = self.transformer.predict_embedding(sequences)
+        x_embedding = self.transformer.compute_embeddings(sequences)["cls"]
         probabilities = self.model(torch.tensor(x_embedding).float())
         probabilities = probabilities.detach().cpu().numpy()
 
