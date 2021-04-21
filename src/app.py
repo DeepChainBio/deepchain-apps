@@ -5,9 +5,8 @@ WARNINGS: if you run the app locally and don't have a GPU
 
 from typing import Dict, List, Optional
 
-from deepchain.components import DeepChainApp
 from biotransformers import BioTransformers
-
+from deepchain.components import DeepChainApp
 from torch import load
 
 Score = Dict[str, float]
@@ -24,7 +23,7 @@ class App(DeepChainApp):
 
     def __init__(self, device: str = "cuda:0"):
         self._device = device
-        self.transformer = BioTransformers(model_dir="Rostlab/prot_bert")
+        self.transformer = BioTransformers(backend="protbert", device=device)
 
         # TODO: fill _checkpoint_filename if needed
         # Make sure to put your checkpoint file in your_app/checkpoint folder
