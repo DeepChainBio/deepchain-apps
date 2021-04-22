@@ -146,8 +146,8 @@ class App(DeepChainApp):
             Calculate embeddings with the pre-trained Tranformer module
             -- Use same embedding as the one for training the model!
             -- Get available embedding with :
-                >> transformer.list_esm_backend()
-                >> embeddings = self.transformer.predict_embedding(sequences)
+                >> transformer.list_backend()
+                >> embeddings = self.transformer.compute_embedding(sequences)
 
 
         Args:
