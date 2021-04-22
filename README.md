@@ -2,11 +2,17 @@
 <p align="center">
   <img width="50%" src="./.docs/source/_static/deepchain.png">
 </p>
+![PyPI](https://img.shields.io/pypi/v/deepchain-apps)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
 
 # Description
 DeepChain apps is a collaborative framework that allows the user to create scorers to evaluate protein sequences. These scorers can be either Classifiers or Predictors. 
 
-This github is hosting a template for creating a personal application to deploy on deepchain.bio. The main deepchain-apps package can be found on pypi.
+This github is hosting a template for creating a personal application to deploy on deepchain.bio. The main [deepchain-apps](https://pypi.org/project/deepchain-apps/) package can be found on pypi.
+To leverage the apps capability, take a look at the [bio-transformers](https://pypi.org/project/bio-transformers/) and [bio-datasets](https://pypi.org/project/bio-datasets) package.
 
 ## Installation
 It is recommended to work with conda environnements in order to manage the specific dependencies of the package.
@@ -34,19 +40,26 @@ deepchain deploy myapplication
 ```
 
 
-## App structure
-
-This template provide an example of application that you can submit.
-The final app must have the following architecture:
+### App structure
 
 - my_application
   - src/
     - app.py
+    - DESCRIPTION.md
+    - tags.json
     - Optionnal : requirements.txt (for extra packages)
   - checkpoint/
     - Optionnal : model.[h5/pt]
 
 The main app class must be named ’App’
+
+### Tags
+In order your app to be visible and well documented, tags should be filled to precised at least the *tasks* section.
+
+  - tasks
+  - librairies
+  - embeddings
+  - datasets
 
 # Deepchain-apps templates
 
@@ -78,11 +91,11 @@ Be careful, you must use the same embedding for the training and the ```compute_
 
 
 ```python
-from pathlib import Path
 from typing import Dict, List, Optional
 
 import torch
-from deepchain.components import DeepChainApp, Transformers
+from biotransformers import BioTransformers
+from deepchain.components import DeepChainApp
 from torch import load
 
 Score = Dict[str, float]
@@ -99,13 +112,14 @@ class App(DeepChainApp):
 
     def __init__(self, device: str = "cuda:0"):
         self._device = device
-        self.transformer = Transformers(device=device, model_type="esm1_t6_43M_UR50S")
-
+        self.transformer = BioTransformers(backend="protbert", device=device)
+        # TODO: fill _checkpoint_filename if needed
         # Make sure to put your checkpoint file in your_app/checkpoint folder
         self._checkpoint_filename: Optional[str] = "model.pt"
 
-        # Use load_model for tensorflow/keras model
-        # Use load for pytorch model
+        # TODO:  Use proper loading function
+        #        load_model for tensorflow/keras model
+        #        load for pytorch model
         if self._checkpoint_filename is not None:
             self.model = load(self.get_checkpoint_path(__file__))
 
@@ -117,6 +131,7 @@ class App(DeepChainApp):
         Example:
          return ["max_probability", "min_probability"]
         """
+        # TODO: Put your own score_names here
         return ["probability"]
 
     def compute_scores(self, sequences: List[str]) -> ScoreList:
@@ -132,11 +147,20 @@ class App(DeepChainApp):
             -- Get available embedding with :
                 >> transformer.list_esm_backend()
                 >> embeddings = self.transformer.predict_embedding(sequences)
+
+
+        Args:
+            sequences (List[str]): List of proteins (str)
+
+        Returns:
+            ScoreList: List of score (dictionnary with score_name as key)
         """
+        # TODO: Fill with you own score function
+
         if not isinstance(sequences, list):
             sequences = [sequences]
 
-        x_embedding = self.transformer.predict_embedding(sequences)
+        x_embedding = self.transformer.compute_embeddings(sequences)["cls"]
         probabilities = self.model(torch.tensor(x_embedding).float())
         probabilities = probabilities.detach().cpu().numpy()
 
@@ -144,8 +168,46 @@ class App(DeepChainApp):
 
         return prob_list
 ```
+### Build a classifier 
 
-# Getting started with deepchain-apps 
+```python
+from biodatasets import list_datasets, load_dataset
+from deepchain.models import MLP
+from deepchain.models.utils import (
+    confusion_matrix_plot,
+    dataloader_from_numpy,
+    model_evaluation_accuracy,
+)
+from sklearn.model_selection import train_test_split
+
+# Load embedding and target dataset
+pathogen = load_dataset("pathogen")
+_, y = pathogen.to_npy_arrays(input_names=["sequence"], target_names=["class"])
+embeddings = pathogen.get_embeddings("sequence", "protbert", "cls")
+
+X_train, X_val, y_train, y_val = train_test_split(embeddings, y[0], test_size=0.3)
+
+train_dataloader = dataloader_from_numpy(X_train, y_train, batch_size=32)
+test_dataloader = dataloader_from_numpy(X_val, y_val, batch_size=32)
+
+# Build a multi-layer-perceptron on top of embedding
+
+# The fit method can handle all the arguments available in the
+# 'trainer' class of pytorch lightening :
+#               https://pytorch-lightning.readthedocs.io/en/latest/common/trainer.html
+# Example arguments:
+# * specifies all GPUs regardless of its availability :
+#               Trainer(gpus=-1, auto_select_gpus=False, max_epochs=20)
+
+mlp = MLP(input_shape=X_train.shape[1])
+mlp.fit(train_dataloader, epochs=5)
+mlp.save_model("model.pt")
+
+# Model evaluation
+prediction, truth = model_evaluation_accuracy(test_dataloader, mlp)
+```
+
+# Getting started with deepchain-apps cli
 
 ##  CLI
 The CLI provides 4 main commands:
@@ -195,28 +257,6 @@ The CLI provides 4 main commands:
     ```
 
 The application will be deploy in DeepChain platform.
-
-## Embedding
-
-Some embeddings are provided in the `Transformers` module
-
-```python
-from deepchain.components import Transformers
-```
-
-The model are furnished, but not mandatory, if you want to make an embedding of your protein sequence.
-The ESM (evolutionary scale modeling) and protBert models are provided, with different architecture.
-Here for some full details of the architecture [esm](https://github.com/facebookresearch/esm) or [protbert](https://huggingface.co/Rostlab/prot_bert)
-
-- 'esm1_t6_43M_UR50S'
-- 'esm1_t12_85M_UR50S'
-- 'esm_msa1_t12_100M_UR50S'
-- 'esm1b_t33_650M_UR50S'
-- 'esm1_t34_670M_UR100'
-- 'esm1_t34_670M_UR50D'
-- 'esm1_t34_670M_UR50S'
-
-!! The embedding will run on a GPU on the platform. But for a testing phase on your personal computer (CPU), you should choose the smaller architecture.
 
 ## License
 Apache License Version 2.0

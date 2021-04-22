@@ -3,8 +3,6 @@ WARNINGS: if you run the app locally and don't have a GPU
           you should choose device='cpu'
 """
 
-
-from pathlib import Path
 from typing import Dict, List, Optional
 
 import torch
