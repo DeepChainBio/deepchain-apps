@@ -14,11 +14,11 @@ ScoreList = List[Score]
 
 
 class App(DeepChainApp):
-    """
-    DeepChain App template:
-    Implement score_names() and compute_score() methods.
-    Choose a a transformer available on DeepChain
-    Choose a personal keras/tensorflow model
+    """DeepChain App template:
+
+    - Implement score_names() and compute_score() methods.
+    - Choose a a transformer available on DeepChain
+    - Choose a personal keras/tensorflow model
     """
 
     def __init__(self, device: str = "cuda:0"):
@@ -30,15 +30,14 @@ class App(DeepChainApp):
         self._checkpoint_filename: Optional[str] = None
 
         # TODO:  Use proper loading function
-        #        load_model for tensorflow/keras model
-        #        load for pytorch model
+        # load_model for tensorflow/keras model - load for pytorch model
         if self._checkpoint_filename is not None:
             self.model = load(self.get_checkpoint_path(__file__))
 
     @staticmethod
     def score_names() -> List[str]:
-        """
-        App Score Names. Must be specified
+        """App Score Names. Must be specified
+
         Example:
          return ["max_probability", "min_probability"]
         """
@@ -46,17 +45,12 @@ class App(DeepChainApp):
         return ["loglikelihood"]
 
     def compute_scores(self, sequences: List[str]) -> ScoreList:
-        """
-        Return a list of all proteins score
+        """Return a list of all proteins score
+
         Score must be a list of dict:
                 - element of list is protein score
                 - key of dict are score_names
-
-        Example:
-            Calculate embeddings with the pre-trained transformer
-            >> embeddings = self.transformer.predict_embedding(sequences)
         """
-
         # TODO : Fill with you own score function
 
         if not isinstance(sequences, list):

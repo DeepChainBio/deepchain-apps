@@ -130,3 +130,6 @@ dmypy.json
 
 #model checkpoint
 *.pt
+
+#logs
+lightning_logs/*
