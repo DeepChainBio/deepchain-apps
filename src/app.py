@@ -53,9 +53,6 @@ class App(DeepChainApp):
         """
         # TODO : Fill with you own score function
 
-        if not isinstance(sequences, list):
-            sequences = [sequences]
-
         loglikelihoods = self.transformer.compute_loglikelihood(sequences)
         log_list = [{self.score_names()[0]: log} for log in loglikelihoods]
 
