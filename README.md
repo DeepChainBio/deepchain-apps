@@ -10,7 +10,7 @@
 ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
 
 # Description
-DeepChain apps is a collaborative framework that allows the user to create scorers to evaluate protein sequences. These scorers can be either Classifiers or Predictors. 
+DeepChain apps is a collaborative framework that allows the user to create scorers to evaluate protein sequences. These scorers can be either Classifiers or Predictors.
 
 This github is hosting a template for creating a personal application to deploy on deepchain.bio. The main [deepchain-apps](https://pypi.org/project/deepchain-apps/) package can be found on pypi.
 To leverage the apps capability, take a look at the [bio-transformers](https://pypi.org/project/bio-transformers/) and [bio-datasets](https://pypi.org/project/bio-datasets) package.
@@ -24,7 +24,10 @@ It is recommended to work with conda environnements in order to manage the speci
 ```
 
 # How it works
-Some command are provided in order to create and deploy an application. Below are the main commands that should be used in a terminal:
+If you want to create and deploy an app on deepchain hub, you could use the command provided in the [deepchain-apps](https://pypi.org/project/deepchain-apps/) package.
+Below are the main commands that should be used in a terminal:
+
+## Basic CLI
 
 ```
 deepchain login
@@ -32,7 +35,7 @@ deepchain create myapplication
 ```
 The last command will download the github files inside the **myapplication** folder.
 
-You can modify the app.py file, as explain in the [Deechain-apps templates](#deepchain-apps-templates)
+You can modify the app.py file, as explain in the [Deepchain-apps templates](#deepchain-apps-templates)
 
 To deploy the app on deepchain.bio, use:
 
@@ -40,22 +43,45 @@ To deploy the app on deepchain.bio, use:
 deepchain deploy myapplication
 ```
 
+## How generate token to login deepchain?
+If you want to deploy biology app on deepchain, you should first create a personal account on [deepchain](https://deepchain.bio/) and go to the user profile section.
+As you can see below, you will be able to generate a PAT (personal access token) that you can use with the CLI command:
+
+```
+deepchain login
+```
+
+<p align="center">
+  <img width="70%" src="./.docs/source/_static/login.png">
+</p>
+
+
 
 ### App structure
+When creating an app, you will download the current github folder with the following structure.
 
-- my_application
-  - src/
-    - app.py
-    - DESCRIPTION.md
-    - tags.json
-    - Optionnal : requirements.txt (for extra packages)
-  - checkpoint/
-    - Optionnal : model.[h5/pt]
+```bash
+ .
+├── README.md # explain how to create an app
+├── __init__.py # __init__ file to create python module
+├── checkpoint
+│   ├── __init__.py
+│   └── Optionnal : model.pt # optional: model to be used in app must be placed there
+├── examples
+│   ├── app_with_checkpoint.py # example: app example with checkpoint
+│   └── torch_classifier.py # example: show how to train a neural network with pre-trained embeddings
+└── src
+    ├── DESC.md # Desciption file of the application, feel free to put a maximum of informations.
+    ├── __init__.py
+    ├── app.py # main application script. Main class must be named App.
+    └── tags.json # file to register the tags on the hub.
+```
 
-The main app class must be named ’App’
+The main class must be named ```App``` in ```app.py```
 
 ### Tags
-In order your app to be visible and well documented, tags should be filled to precised at least the *tasks* section.
+In order your app to be visible and well documented, tags should be filled to precise at least the *tasks* section.
+It will be really useful to retrieve it from deepchain hub.
 
   - tasks
   - librairies
@@ -229,7 +255,6 @@ The CLI provides 4 main commands:
     deepchain apps --delete my_application
     ```
 
-The application will be deploy in DeepChain platform.
 
 ## License
 Apache License Version 2.0
