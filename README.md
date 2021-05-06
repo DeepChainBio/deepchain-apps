@@ -52,7 +52,7 @@ deepchain login
 ```
 
 <p align="center">
-  <img width="70%" src="./.docs/source/_static/login.png">
+  <img width="100%" src="./.docs/source/_static/login.png">
 </p>
 
 
