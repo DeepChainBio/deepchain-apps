@@ -35,7 +35,7 @@ deepchain create myapplication
 ```
 The last command will download the github files inside the **myapplication** folder.
 
-You can modify the app.py file, as explain in the [Deepchain-apps templates](#deepchain-apps-templates)
+You can modify the app.py file, as explained in the [Deepchain-apps templates](#deepchain-apps-templates)
 
 To deploy the app on deepchain.bio, use:
 
@@ -62,7 +62,7 @@ When creating an app, you will download the current github folder with the follo
 
 ```bash
  .
-├── README.md # explain how to create an app
+├── README.md # explains how to create an app
 ├── __init__.py # __init__ file to create python module
 ├── checkpoint
 │   ├── __init__.py
@@ -71,7 +71,7 @@ When creating an app, you will download the current github folder with the follo
 │   ├── app_with_checkpoint.py # example: app example with checkpoint
 │   └── torch_classifier.py # example: show how to train a neural network with pre-trained embeddings
 └── src
-    ├── DESC.md # Desciption file of the application, feel free to put a maximum of informations.
+    ├── DESC.md # Desciption file of the application, feel free to put a maximum of information.
     ├── __init__.py
     ├── app.py # main application script. Main class must be named App.
     └── tags.json # file to register the tags on the hub.
@@ -80,7 +80,7 @@ When creating an app, you will download the current github folder with the follo
 The main class must be named ```App``` in ```app.py```
 
 ### Tags
-In order your app to be visible and well documented, tags should be filled to precise at least the *tasks* section.
+In order for your app to be visible and well documented, tags should be filled to precise at least the *tasks* section.
 It will be really useful to retrieve it from deepchain hub.
 
   - tasks
@@ -93,10 +93,10 @@ It will be really useful to retrieve it from deepchain hub.
 Some templates are provided in order to create and deploy an app.
 ## Examples
 
-You can  implement whatever function you want inside ```compute_scores()``` function. 
+You can implement whatever function you want inside ```compute_scores()``` function. 
 
-It just have to respect to return format: 
-One dictionnary for each proteins that are scored. Each keys of the dictionnary are declared in ```score_names()``` function.
+It just has to respect to return format: 
+One dictionary for each protein that are scored. Each key of the dictionary are declared in ```score_names()``` function.
 
 ```python
 [
@@ -171,8 +171,8 @@ class App(DeepChainApp):
 
 ```python
 """
-Module that provide a classifier template to train a model on embeddings.
-With use the pathogen vs human dataset as an example. The embedding of 100k proteins come 
+Module that provides a classifier template to train a model on embeddings.
+With using the pathogen vs human dataset as an example. The embedding of 100k proteins come 
 from the protBert model.
 The model is built with pytorch_ligthning, a wrapper on top of 
 pytorch (similar to keras with tensorflow)
@@ -217,7 +217,7 @@ confusion_matrix_plot(y_test, (y_pred > 0.5).astype(int), ["0", "1"])
 ##  CLI
 The CLI provides 4 main commands:
 
-- **login** : you need to supply the token provide on the platform (PAT: personnal access token).
+- **login** : you need to supply the token provide on the platform (PAT: personal access token).
 
   ```
   deepchain login
