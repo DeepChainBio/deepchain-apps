@@ -81,7 +81,7 @@ When creating an app, you will download the current github folder with the follo
 The main class must be named ```App``` in ```app.py```
 
 ### Tags
-In order for your app to be visible and well documented, tags should be filled to precise at least the *tasks* section.
+For your app to be visible and well documented, tags should be filled to precise at least the *tasks* section.
 It will be really useful to retrieve it from deepchain hub.
 
   - tasks
@@ -94,12 +94,12 @@ If you want your app to benefit from deepchain' GPU, set cuda to "True" in tags.
 
 ### Special method in app
 
-`DeepChainApp` class provide two special method to load checkpoint an extra files:
+`DeepChainApp` class provides two special methods to load checkpoint and extra files:
 
 - `get_checkpoint_path(__file__)` : return path for file in checkpoint folder
 - `get_filepath(__file__,file)` : return path for file in src folder
 
-You must use these functions, not relative path to load your extra files.
+You must use these functions, not a relative path to load your extra files.
 
 # Deepchain-apps templates
 
@@ -109,7 +109,7 @@ Some templates are provided in order to create and deploy an app.
 You can implement whatever function you want inside ```compute_scores()``` function. 
 
 It just has to respect to return format: 
-One dictionary for each protein that are scored. Each key of the dictionary are declared in ```score_names()``` function.
+One dictionary for each protein that is scored. Each key of the dictionary are declared in ```score_names()``` function.
 
 ```python
 [
