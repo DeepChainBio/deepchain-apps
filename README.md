@@ -17,6 +17,7 @@ To leverage the apps capability, take a look at the [bio-transformers](https://p
 
 ## Installation
 It is recommended to work with conda environnements in order to manage the specific dependencies of the package.
+
 ```bash
   conda create --name deepchain-env python=3.7 -y 
   conda activate deepchain-env
@@ -87,6 +88,18 @@ It will be really useful to retrieve it from deepchain hub.
   - librairies
   - embeddings
   - datasets
+  - cuda
+
+If you want your app to benefit from deepchain' GPU, set cuda to "True" in tags. It will run on CPU by default.
+
+### Special method in app
+
+`DeepChainApp` class provide two special method to load checkpoint an extra files:
+
+- `get_checkpoint_path(__file__)` : return path for file in checkpoint folder
+- `get_filepath(__file__,file)` : return path for file in src folder
+
+You must use these functions, not relative path to load your extra files.
 
 # Deepchain-apps templates
 
@@ -132,9 +145,10 @@ ScoreList = List[Score]
 class App(DeepChainApp):
     """DeepChain App template:
 
-    - Implement score_names() and compute_score() methods.
-    - Choose a a transformer available on BioTranfformers
-    - Choose a personal keras/tensorflow model
+    * Implement score_names() and compute_score() methods.
+    * Choose a transformer available on bio-transformers (or others pacakge)
+    * Choose a personal keras/tensorflow model (or not)
+    * compute whatever score of interest based on protein sequence
     """
 
     def __init__(self, device: str = "cuda:0"):
@@ -149,15 +163,29 @@ class App(DeepChainApp):
 
     @staticmethod
     def score_names() -> List[str]:
-        """App Score Names. Must be specified.
+        """App Score Names. Must be specified
+
+        Returns:
+            A list of score names
 
         Example:
-         return ["max_probability", "min_probability"]
+            return ["max_probability", "min_probability"]
         """
         return ["probability"]
 
     def compute_scores(self, sequences: List[str]) -> ScoreList:
-        """Return a list of all proteins score"""
+         """Compute a score based on a user defines function.
+
+        This function compute a score for each sequences receive in the input list.
+        Caution :  to load extra file, put it in src/ folder and use
+                   self.get_filepath(__file__, "extra_file.ext")
+
+        Returns:
+            ScoreList object
+            Score must be a list of dict:
+                    * element of list is protein score
+                    * key of dict are score_names
+        """
 
         x_embedding = self.transformer.compute_embeddings(sequences)["cls"]
         probabilities = self.model(torch.tensor(x_embedding).float())
@@ -167,6 +195,7 @@ class App(DeepChainApp):
 
         return prob_list
 ```
+
 ### Build a classifier 
 
 ```python
