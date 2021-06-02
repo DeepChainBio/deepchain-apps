@@ -52,8 +52,8 @@ class App(DeepChainApp):
         """Compute a score based on a user defines function.
 
         This function compute a score for each sequences receive in the input list.
-        Caution :  to load extra files, put it in src/ folder and use
-                   self.get_filepath(__file__, "extra_files.ext")
+        Caution :  to load extra file, put it in src/ folder and use
+                   self.get_filepath(__file__, "extra_file.ext")
 
         Returns:
             ScoreList object
