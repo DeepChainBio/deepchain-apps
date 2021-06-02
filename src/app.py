@@ -16,9 +16,10 @@ ScoreList = List[Score]
 class App(DeepChainApp):
     """DeepChain App template:
 
-    - Implement score_names() and compute_score() methods.
-    - Choose a a transformer available on DeepChain
-    - Choose a personal keras/tensorflow model
+    * Implement score_names() and compute_score() methods.
+    * Choose a transformer available on bio-transformers (or others pacakge)
+    * Choose a personal keras/tensorflow model (or not)
+    * compute whatever score of interest based on protein sequence
     """
 
     def __init__(self, device: str = "cuda:0"):
@@ -38,18 +39,27 @@ class App(DeepChainApp):
     def score_names() -> List[str]:
         """App Score Names. Must be specified
 
+        Returns:
+            A list of score names
+
         Example:
-         return ["max_probability", "min_probability"]
+            return ["max_probability", "min_probability"]
         """
         # TODO : Put your own score_names here
         return ["loglikelihood"]
 
     def compute_scores(self, sequences: List[str]) -> ScoreList:
-        """Return a list of all proteins score
+        """Compute a score based on a user defines function.
 
-        Score must be a list of dict:
-                - element of list is protein score
-                - key of dict are score_names
+        This function compute a score for each sequences receive in the input list.
+        Caution :  to load extra files, put it in src/ folder and use
+                   self.get_filepath(__file__, "extra_files.ext")
+
+        Returns:
+            ScoreList object
+            Score must be a list of dict:
+                    * element of list is protein score
+                    * key of dict are score_names
         """
         # TODO : Fill with you own score function
 
