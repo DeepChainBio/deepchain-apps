@@ -3,7 +3,7 @@
     "libraries": [],
     "embeddings": [],
     "datasets": [],
-    "cuda": [
-        "False"
+    "device": [
+        "cpu"
     ]
 }

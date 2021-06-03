@@ -1,7 +1,7 @@
 # Description
 This app is a base application that compute the loglikelihood (the probability that a protein is natural or not).
 
-We use a bio-transformers with a ESM 'prot_bert' model as backend to make the computation of logits
+We use a bio-transformers with a 'protbert'  model as backend to make the computation of logits
 
 # Tags
 Fill the tags.json file in this folder:
@@ -10,8 +10,8 @@ Fill the tags.json file in this folder:
 - libraries: str -> libraries used for the app
 - embeddings: str -> embedding model if used.
 - datasets: str -> dataset name if used.
-- cuda: []: bool -> By default, the app are launch on CPU on deepchain, put cuda to "True" to benefit GPU
-                    and accelerate the optimization process during score computation.
+- device: ["cpu"]: str -> By default, the app are launched on cpu on deepchain, put device to "gpu" to benefit GPU
+                          and accelerate the optimization process during score computation.
 
 
 ## libraries
@@ -26,4 +26,3 @@ Fill the tags.json file in this folder:
 - ESM
 
 ## datasets
-

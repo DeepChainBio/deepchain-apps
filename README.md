@@ -88,9 +88,9 @@ It will be really useful to retrieve it from deepchain hub.
   - librairies
   - embeddings
   - datasets
-  - cuda
+  - device
 
-If you want your app to benefit from deepchain' GPU, set cuda to "True" in tags. It will run on CPU by default.
+If you want your app to benefit from deepchain' GPU, set device to "gpu" in tags. It will run on "cpu" by default.
 
 ### Special method in app
 
