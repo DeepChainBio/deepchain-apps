@@ -33,7 +33,9 @@ class App(DeepChainApp):
         # build your model
         self.model = MLP(input_shape=1024, n_class=2)
 
-        # load_model for tensorflow/keras model-load for pytorch model
+        # TODO:  Use proper loading function
+        # load_model for tensorflow/keras model - load for pytorch model
+        # torch model must be built before loading state_dict
         if self._checkpoint_filename is not None:
             state_dict = load(self.get_checkpoint_path(__file__))
             self.model.load_state_dict(state_dict)
