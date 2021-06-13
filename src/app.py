@@ -19,6 +19,7 @@ class App(DeepChainApp):
     * Implement score_names() and compute_score() methods.
     * Choose a transformer available on bio-transformers (or others pacakge)
     * Choose a personal keras/tensorflow model (or not)
+    * Build model and load the weights.
     * compute whatever score of interest based on protein sequence
     """
 
@@ -32,8 +33,10 @@ class App(DeepChainApp):
 
         # TODO:  Use proper loading function
         # load_model for tensorflow/keras model - load for pytorch model
+        # torch model must be built before loading state_dict
         if self._checkpoint_filename is not None:
-            self.model = load(self.get_checkpoint_path(__file__))
+            state_dict = load(self.get_checkpoint_path(__file__))
+            # self.model.load_state_dict(state_dict)
 
     @staticmethod
     def score_names() -> List[str]:
@@ -61,8 +64,7 @@ class App(DeepChainApp):
                     * element of list is protein score
                     * key of dict are score_names
         """
-        # TODO : Fill with you own score function
-
+        # TODO : Fill with you own score functio
         loglikelihoods = self.transformer.compute_loglikelihood(sequences)
         log_list = [{self.score_names()[0]: log} for log in loglikelihoods]
 

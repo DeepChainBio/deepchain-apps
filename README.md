@@ -9,8 +9,24 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
 
+<details><summary>Table of contents</summary>
+
+- [Description](#description)
+- [How it works](#howitworks)
+- [Getting started with App](#usage)
+- [CLI](#usage)
+  - login
+  - create
+  - deploy
+  - apps
+- [Roadmap](#roadmap)
+- [Citations](#citations)
+- [License](#license)
+</details>
+
+
 # Description
-DeepChain apps is a collaborative framework that allows the user to create scorers to evaluate protein sequences. These scorers can be either Classifiers or Predictors.
+DeepChain apps is a collaborative framework that allows the user to create scorers to evaluate protein sequences. These scorers can be either classifier or predictor.
 
 This github is hosting a template for creating a personal application to deploy on deepchain.bio. The main [deepchain-apps](https://pypi.org/project/deepchain-apps/) package can be found on pypi.
 To leverage the apps capability, take a look at the [bio-transformers](https://pypi.org/project/bio-transformers/) and [bio-datasets](https://pypi.org/project/bio-datasets) package.
@@ -58,7 +74,7 @@ deepchain login
 
 
 
-### App structure
+# App structure
 When creating an app, you will download the current github folder with the following structure.
 
 ```bash
@@ -75,7 +91,9 @@ When creating an app, you will download the current github folder with the follo
     ├── DESC.md # Desciption file of the application, feel free to put a maximum of information.
     ├── __init__.py
     ├── app.py # main application script. Main class must be named App.
+    └── Optional : model.py # file to register the models you use in app.py.
     └── tags.json # file to register the tags on the hub.
+    
 ```
 
 The main class must be named ```App``` in ```app.py```
@@ -99,16 +117,41 @@ If you want your app to benefit from deepchain' GPU, set device to "gpu" in tags
 - `get_checkpoint_path(__file__)` : return path for file in checkpoint folder
 - `get_filepath(__file__,file)` : return path for file in src folder
 
-You must use these functions, not a relative path to load your extra files.
+You must use these functions, not a relative path to load your extra files in order to safely load your scorer in deepchain.
 
 # Deepchain-apps templates
 
-Some templates are provided in order to create and deploy an app.
+You can also create an application based on an app already available on the public [deepchain hub](https://app.deepchain.bio/hub/apps):
+
+## Example from deepchain hub
+
+First, you can list all the available app in the hub like following:
+
+```
+>> deepchain apps --public
+
+----------------------------------------------------------------
+APP                                        USERNAME             
+----------------------------------------------------------------
+OntologyPredict                    username1@instadeep.com    
+DiseaseRiskApp                     username2@instadeep.com     
+```
+
+You can simply download the app locally with the cli:
+
+```
+deepchain download username1@instadeep.com/OntologyPredict OntologyPredict
+```
+
+The app will be downloaded in the OntologyPredict folder.
+
 ## Examples
+Some templates are provided in order to create and deploy an app.
 
 You can implement whatever function you want inside ```compute_scores()``` function. 
 
-It just has to respect to return format: 
+It just has to respect the return format: 
+
 One dictionary for each protein that is scored. Each key of the dictionary are declared in ```score_names()``` function.
 
 ```python
@@ -124,11 +167,13 @@ One dictionary for each protein that is scored. Each key of the dictionary are d
 ]
 ```
 
-### Neural Network scorer
+## Scorer based on a neural network
 An example of training with an embedding is provided in the example/torch_classifier.py script.
 
 Be careful, you must use the same embedding for the training and the ```compute_scores()``` method.
 
+### Where to put the model?
+When training a model with pytorch, you must save the weights with the ```state_dict()``` method, rebuilt the model architecture in the Scorer or in a ```model.py``` file and load the weights like in the example below.
 
 ```python
 from typing import Dict, List, Optional
@@ -136,6 +181,9 @@ from typing import Dict, List, Optional
 import torch
 from biotransformers import BioTransformers
 from deepchain.components import DeepChainApp
+
+# TODO : from model import myModel
+from deepchain.models import MLP
 from torch import load
 
 Score = Dict[str, float]
@@ -145,10 +193,9 @@ ScoreList = List[Score]
 class App(DeepChainApp):
     """DeepChain App template:
 
-    * Implement score_names() and compute_score() methods.
-    * Choose a transformer available on bio-transformers (or others pacakge)
-    * Choose a personal keras/tensorflow model (or not)
-    * compute whatever score of interest based on protein sequence
+    - Implement score_names() and compute_score() methods.
+    - Choose a a transformer available on BioTranfformers
+    - Choose a personal keras/tensorflow model
     """
 
     def __init__(self, device: str = "cuda:0"):
@@ -156,36 +203,26 @@ class App(DeepChainApp):
         self.transformer = BioTransformers(backend="protbert", device=device)
         # Make sure to put your checkpoint file in your_app/checkpoint folder
         self._checkpoint_filename: Optional[str] = "model.pt"
+        # build your model
+        self.model = MLP(input_shape=1024, n_class=2)
 
         # load_model for tensorflow/keras model-load for pytorch model
         if self._checkpoint_filename is not None:
-            self.model = load(self.get_checkpoint_path(__file__))
+            state_dict = load(self.get_checkpoint_path(__file__))
+            self.model.load_state_dict(state_dict)
+            self.model.eval()
 
     @staticmethod
     def score_names() -> List[str]:
-        """App Score Names. Must be specified
-
-        Returns:
-            A list of score names
+        """App Score Names. Must be specified.
 
         Example:
-            return ["max_probability", "min_probability"]
+         return ["max_probability", "min_probability"]
         """
         return ["probability"]
 
     def compute_scores(self, sequences: List[str]) -> ScoreList:
-         """Compute a score based on a user defines function.
-
-        This function compute a score for each sequences receive in the input list.
-        Caution :  to load extra file, put it in src/ folder and use
-                   self.get_filepath(__file__, "extra_file.ext")
-
-        Returns:
-            ScoreList object
-            Score must be a list of dict:
-                    * element of list is protein score
-                    * key of dict are score_names
-        """
+        """Return a list of all proteins score"""
 
         x_embedding = self.transformer.compute_embeddings(sequences)["cls"]
         probabilities = self.model(torch.tensor(x_embedding).float())
@@ -196,18 +233,19 @@ class App(DeepChainApp):
         return prob_list
 ```
 
-### Build a classifier 
+### Build a classifier with embeddings.
 
 ```python
 """
-Module that provides a classifier template to train a model on embeddings.
-With using the pathogen vs human dataset as an example. The embedding of 100k proteins come 
+Module that provide a classifier template to train a model on embeddings.
+With use the pathogen vs human dataset as an example. The embedding of 100k proteins come 
 from the protBert model.
 The model is built with pytorch_ligthning, a wrapper on top of 
 pytorch (similar to keras with tensorflow)
 Feel feel to build you own model if you want to build a more complex one
 """
 
+import numpy as np
 from biodatasets import list_datasets, load_dataset
 from deepchain.models import MLP
 from deepchain.models.utils import confusion_matrix_plot, model_evaluation_accuracy
@@ -229,7 +267,11 @@ x_train, x_test, y_train, y_test = train_test_split(embeddings, y[0], test_size=
 # * specifies all GPUs regardless of its availability :
 #               Trainer(gpus=-1, auto_select_gpus=False, max_epochs=20)
 
-mlp = MLP()
+# Input variables for MLP
+n_class = len(np.unique(y_train))
+input_shape = x_train.shape[1]
+
+mlp = MLP(input_shape=input_shape, n_class=n_class)
 mlp.fit(x_train, y_train, epochs=5)
 mlp.save("model.pt")
 

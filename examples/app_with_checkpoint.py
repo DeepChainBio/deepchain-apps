@@ -8,6 +8,9 @@ from typing import Dict, List, Optional
 import torch
 from biotransformers import BioTransformers
 from deepchain.components import DeepChainApp
+
+# TODO : from model import myModel
+from deepchain.models import MLP
 from torch import load
 
 Score = Dict[str, float]
@@ -27,10 +30,14 @@ class App(DeepChainApp):
         self.transformer = BioTransformers(backend="protbert", device=device)
         # Make sure to put your checkpoint file in your_app/checkpoint folder
         self._checkpoint_filename: Optional[str] = "model.pt"
+        # build your model
+        self.model = MLP(input_shape=1024, n_class=2)
 
         # load_model for tensorflow/keras model-load for pytorch model
         if self._checkpoint_filename is not None:
-            self.model = load(self.get_checkpoint_path(__file__))
+            state_dict = load(self.get_checkpoint_path(__file__))
+            self.model.load_state_dict(state_dict)
+            self.model.eval()
 
     @staticmethod
     def score_names() -> List[str]:

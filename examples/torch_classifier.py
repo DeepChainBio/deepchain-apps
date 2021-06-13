@@ -7,6 +7,7 @@ pytorch (similar to keras with tensorflow)
 Feel feel to build you own model if you want to build a more complex one
 """
 
+import numpy as np
 from biodatasets import list_datasets, load_dataset
 from deepchain.models import MLP
 from deepchain.models.utils import confusion_matrix_plot, model_evaluation_accuracy
@@ -28,7 +29,11 @@ x_train, x_test, y_train, y_test = train_test_split(embeddings, y[0], test_size=
 # * specifies all GPUs regardless of its availability :
 #               Trainer(gpus=-1, auto_select_gpus=False, max_epochs=20)
 
-mlp = MLP()
+# Input variables for MLP
+n_class = len(np.unique(y_train))
+input_shape = x_train.shape[1]
+
+mlp = MLP(input_shape=input_shape, n_class=n_class)
 mlp.fit(x_train, y_train, epochs=5)
 mlp.save("model.pt")
 
