@@ -123,7 +123,7 @@ You must use these functions, not a relative path to load your extra files in or
 
 You can also create an application based on an app already available on the public [deepchain hub](https://app.deepchain.bio/hub/apps):
 
-## Example from deepchain hub
+## Apps from deepchain hub
 
 First, you can list all the available app in the hub like following:
 
@@ -145,7 +145,7 @@ deepchain download username1@instadeep.com/OntologyPredict OntologyPredict
 
 The app will be downloaded in the OntologyPredict folder.
 
-## Examples
+## Templates
 Some templates are provided in order to create and deploy an app.
 
 You can implement whatever function you want inside ```compute_scores()``` function. 
@@ -286,7 +286,7 @@ confusion_matrix_plot(y_test, (y_pred > 0.5).astype(int), ["0", "1"])
 # Getting started with deepchain-apps cli
 
 ##  CLI
-The CLI provides 4 main commands:
+The CLI provides 5 main commands:
 
 - **login** : you need to supply the token provide on the platform (PAT: personal access token).
 
@@ -330,6 +330,19 @@ The CLI provides 4 main commands:
 
     ```
     deepchain apps --delete my_application
+    ```
+
+  - List all public apps:
+
+    ```
+    deepchain apps --public
+    ```
+
+- **download** :
+  - Download locally an app deployed on deepchain hub
+
+    ```
+      deepchain download user.name@mail.com/AppName AppName
     ```
 
 
