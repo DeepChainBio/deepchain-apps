@@ -3,9 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to deepchain-apps's documentation!
-==========================================
+deepchain-apps :  Documentation and tutorial
+============================================
 
+.. note::  **deepchain-apps** package is component of the deepchain.bio software.
 
 Indices and tables
 ==================
@@ -16,3 +17,19 @@ Indices and tables
    :caption: Getting Started
 
    getting_started/install
+   getting_started/quick_start
+
+.. toctree::
+   :hidden:
+   :maxdepth: 0
+   :caption: Documentation
+
+   documentation/course
+
+.. toctree::
+   :hidden:
+   :maxdepth: 0
+   :caption: Tutorial
+
+   tutorial/cli
+   tutorial/apps_building
