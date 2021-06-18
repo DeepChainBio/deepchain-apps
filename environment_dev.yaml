@@ -1,0 +1,18 @@
+name: deepchain-apps
+channels:
+  - defaults
+dependencies:
+  - python=3.7
+  - pip=20.0.2
+  - pip:
+    - numpy>=1.16,<1.19
+    - pandas>=1.2.3
+    - requests>=2.23.0
+    - scikit-learn>=0.22.0
+    - torch>=1.7.0
+    - tqdm>=4.60.0
+    - sphinx==3.5.1
+    - sphinx-notfound-page==0.6
+    - sphinx-book-theme==0.6.3
+    - sphinx_tabs==2.1.0
+    - m2r2==0.2.7
