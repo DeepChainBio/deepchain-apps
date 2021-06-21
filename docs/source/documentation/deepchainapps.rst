@@ -45,7 +45,4 @@ in your app.
 DeepchainHub 
 ------------
 
-All the applications that have been released publicly can be found on the `hub <https://app.deepchain.bio/hub/apps>`_
-
-.. image::  images/deepchainhub.png
-    :alt: deepchainhub
+All the applications that have been released publicly can be found on the `hub <https://app.deepchain.bio/hub/apps>`_ as describred in this [section](https://deepchain-apps.readthedocs.io/en/latest/documentation/deepchain.html)
