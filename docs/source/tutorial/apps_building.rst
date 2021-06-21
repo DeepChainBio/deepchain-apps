@@ -102,3 +102,65 @@ a score names.
 App with model
 --------------
 
+ You have the ability to build an app with a model checkpoint in pytorch or tensorflow.
+
+.. Important::  You must build your model inside the ``app.py`` file or put a ``model.py`` inside the ``src`` folder and import it.
+.. Hint:: The embeddings in the example below are computed with ``bio-transformers`` and the ``MLP`` is imported from ``deepchain``. There is no restriction about the kind of model to use.
+    
+.. code-block:: python
+
+    from typing import Dict, List, Optional
+
+    import torch
+    from biotransformers import BioTransformers
+    from deepchain.components import DeepChainApp
+
+    # TODO : from model import myModel
+    from deepchain.models import MLP
+    from torch import load
+
+    Score = Dict[str, float]
+    ScoreList = List[Score]
+
+
+    class App(DeepChainApp):
+        """DeepChain App template:
+
+        - Implement score_names() and compute_score() methods.
+        - Choose a a transformer available on BioTranfformers
+        - Choose a personal keras/tensorflow model
+        """
+
+        def __init__(self, device: str = "cuda:0"):
+            self._device = device
+            self.transformer = BioTransformers(backend="protbert", device=device)
+            # Make sure to put your checkpoint file in your_app/checkpoint folder
+            self._checkpoint_filename: Optional[str] = "model.pt"
+            # build your model
+            self.model = MLP(input_shape=1024, n_class=2)
+
+            # load_model for tensorflow/keras model-load for pytorch model
+            if self._checkpoint_filename is not None:
+                state_dict = load(self.get_checkpoint_path(__file__))
+                self.model.load_state_dict(state_dict)
+                self.model.eval()
+
+        @staticmethod
+        def score_names() -> List[str]:
+            """App Score Names. Must be specified.
+
+            Example:
+            return ["max_probability", "min_probability"]
+            """
+            return ["probability"]
+
+        def compute_scores(self, sequences: List[str]) -> ScoreList:
+            """Return a list of all proteins score"""
+
+            x_embedding = self.transformer.compute_embeddings(sequences)["cls"]
+            probabilities = self.model(torch.tensor(x_embedding).float())
+            probabilities = probabilities.detach().cpu().numpy()
+
+            prob_list = [{self.score_names()[0]: prob[0]} for prob in probabilities]
+
+            return prob_list
