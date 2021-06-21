@@ -64,7 +64,7 @@ class App(DeepChainApp):
                     * element of list is protein score
                     * key of dict are score_names
         """
-        # TODO : Fill with you own score functio
+        # TODO : Fill with you own score function
         loglikelihoods = self.transformer.compute_loglikelihood(sequences)
         log_list = [{self.score_names()[0]: log} for log in loglikelihoods]
 
