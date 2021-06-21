@@ -70,7 +70,7 @@ html_theme_options = {
 }
 
 html_title = f"deepchain-apps v{release}"
-html_logo = "_static/instadeep.png"
+html_logo = "_static/instadeep-small.png"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
@@ -84,6 +84,8 @@ extensions = [
     "sphinx.ext.napoleon",  # extensions for google style docstring
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
+    "myst_parser",
+    "myst_nb",
 ]
 
 
