@@ -39,7 +39,7 @@ The Github `DeepChainBio <https://github.com/DeepChainBio>`_  is hosting 3 pytho
    documentation/deepchainapps.rst
    documentation/cli.rst
    documentation/deepchain
-
+   documentation/logging
 
 .. toctree::
    :hidden:
@@ -48,4 +48,4 @@ The Github `DeepChainBio <https://github.com/DeepChainBio>`_  is hosting 3 pytho
 
    tutorial/apps_building.rst
    tutorial/train_model
-   layout
+   
