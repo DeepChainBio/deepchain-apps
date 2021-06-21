@@ -43,3 +43,4 @@ The Github `DeepChainBio <https://github.com/DeepChainBio>`_  is hosting 3 pytho
 
    tutorial/cli.rst
    tutorial/apps_building.rst
+   tutorial/train_model
