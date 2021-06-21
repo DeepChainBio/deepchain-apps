@@ -106,7 +106,7 @@ App with model
 
 .. Important::  You must build your model inside the ``app.py`` file or put a ``model.py`` inside the ``src`` folder and import it.
 .. Hint:: The embeddings in the example below are computed with ``bio-transformers`` and the ``MLP`` is imported from ``deepchain``. There is no restriction about the kind of model to use.
-    
+
 .. code-block:: python
 
     from typing import Dict, List, Optional
@@ -164,3 +164,9 @@ App with model
             prob_list = [{self.score_names()[0]: prob[0]} for prob in probabilities]
 
             return prob_list
+
+Train a model
+-------------
+
+.. Important::  When working with pytorch, you must save your model with ``state_dict`` as explained `here <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended>`_
+
