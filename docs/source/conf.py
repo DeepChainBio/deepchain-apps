@@ -52,6 +52,24 @@ exclude_patterns = []
 #
 html_theme = "sphinx_book_theme"
 
+html_theme_options = {
+    # "theme_dev_mode": True,
+    "path_to_docs": "docs",
+    "repository_url": "https://github.com/DeepChainBio/deep-chain-apps",
+    # "repository_branch": "gh-pages",  # For testing
+    "use_edit_page_button": True,
+    # "use_issues_button": True,
+    "use_repository_button": True,
+    "use_download_button": True,
+    # For testing
+    # "use_fullscreen_button": False,
+    # "home_page_in_toc": True,
+    # "single_page": True,
+    # "extra_footer": "<a href='https://google.com'>Test</a>",  # DEPRECATED KEY
+    # "extra_navbar": "<a href='https://google.com'>Test</a>",
+    # "show_navbar_depth": 2,
+}
+
 html_title = f"deepchain-apps v{release}"
 html_logo = "images/instadeep.png"
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -62,9 +80,11 @@ html_static_path = ["_static"]
 extensions = [
     "sphinx.ext.autodoc",  # autodoc for API
     "sphinx_tabs.tabs",  # for tabs in rst
-    "m2r2",  # for supporting md files
+    # "m2r2",  # for supporting md files
     "notfound.extension",  # for 404 pages
     "sphinx.ext.napoleon",  # extensions for google style docstring
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.viewcode",
 ]
 
 

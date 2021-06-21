@@ -1,6 +1,9 @@
 CLI
 ===
 
+Commands description
+--------------------
+
 The CLI provides 5 main commands:
 
 * **login**: you need to supply the token provide on the platform (PAT: personal access token).
@@ -60,5 +63,5 @@ The CLI provides 5 main commands:
 * **download** : download locally an app deployed on deepchain hub
 
 .. code-block:: bash
-    
+
     deepchain download user.name@mail.com/AppName AppName
