@@ -2,7 +2,7 @@
    sphinx-quickstart on Fri Jun 18 15:00:02 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
-   
+
 =======================
 What is deepchain-apps?
 =======================
@@ -37,12 +37,12 @@ The Github `DeepChainBio <https://github.com/DeepChainBio>`_  is hosting 3 pytho
    :caption: Documentation
 
    documentation/deepchainapps.rst
+   documentation/cli.rst
 
 .. toctree::
    :hidden:
    :maxdepth: -1
    :caption: Tutorial
 
-   tutorial/cli.rst
    tutorial/apps_building.rst
    tutorial/train_model

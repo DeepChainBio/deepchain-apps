@@ -43,9 +43,9 @@ in your app.
 * Use method ``get_filepath(__file__,file)`` to get the absolute path of the file in the ``src`` folder.
 
 DeepchainHub 
-^^^^^^^^^^^^
+------------
 
 All the applications that have been released publicly can be found on the `hub <https://app.deepchain.bio/hub/apps>`_
 
-.. image::  images/deepchainhub.jpeg
+.. image::  images/deepchainhub.png
     :alt: deepchainhub

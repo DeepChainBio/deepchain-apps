@@ -7,7 +7,7 @@ Template
 
 The app below describes the general framework to build an app.
 
-.. code-block::python
+.. code-block:: python
 
     from typing import Dict, List, Optional
     from collections import Counter
@@ -81,7 +81,8 @@ to use in the optimizer. The scores' names that will appear in ``deepchain`` opt
 The return of the ``compute_scores()`` must be a list of dict, where each dict correspond to a protein score, and each key of the dict to 
 a score names.
 
-.. code-block::python
+.. code-block:: python
+
     [
     {
         'score_names_1':score1_seq1
@@ -98,5 +99,6 @@ a score names.
     }
     ]
 
-Score with model
-----------------
+App with model
+--------------
+
