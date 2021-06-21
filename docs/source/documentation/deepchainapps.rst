@@ -6,6 +6,4 @@ All the applications that have been released publicly can be found on the `hub <
 DeepchainHub 
 ^^^^^^^^^^^^
 
-.. image:: deepchainhub.png
-    :align: center
-    :width: 600px
+.. image:: images/deepchainhub.png

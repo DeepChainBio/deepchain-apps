@@ -22,6 +22,9 @@ The Github `DeepChainBio <https://github.com/DeepChainBio>`_  is hosting 3 pytho
    - `bio-datasets <https://github.com/DeepChainBio/bio-datasets>`_ allows to download protein seqeunces datasets and pre-computed embeddings.
    - `deep-chain-apps <https://github.com/DeepChainBio/deep-chain-apps>`_ provide an Apps template.
 
+
+.. image:: deepchainhub.png
+   
 Tables
 ======
 

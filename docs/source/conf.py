@@ -14,6 +14,7 @@
 #
 import os
 import sys
+from datetime import datetime
 
 sys.path.insert(0, os.path.abspath("../.."))
 
@@ -21,11 +22,11 @@ sys.path.insert(0, os.path.abspath("../.."))
 # -- Project information -----------------------------------------------------
 
 project = "deepchain-apps"
-copyright = "2021, instadeep"
+copyright = str(datetime.now().year) + ", instadeep"
 author = "instadeep"
 
 # The full version, including alpha/beta/rc tags
-release = "0.1.0"
+release = "0.1.8"
 
 
 # -- General configuration ---------------------------------------------------
@@ -51,7 +52,7 @@ exclude_patterns = []
 #
 html_theme = "sphinx_book_theme"
 
-html_title = f"deepchain-apps v{0.1.8}"
+html_title = f"deepchain-apps v{release}"
 html_logo = "images/instadeep.png"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
