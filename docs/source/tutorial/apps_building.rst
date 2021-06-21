@@ -104,7 +104,7 @@ App with model
 
  You have the ability to build an app with a model checkpoint in pytorch or tensorflow.
 
-.. Important::  You must build your model inside the ``app.py`` file or put a ``model.py`` inside the ``src`` folder and import it.
+.. WARNING::  You must build your model inside the ``app.py`` file or put a ``model.py`` inside the ``src`` folder and import it. You have to load the ``state_dict`` in the model with pytorch.
 .. Hint:: The embeddings in the example below are computed with ``bio-transformers`` and the ``MLP`` is imported from ``deepchain``. There is no restriction about the kind of model to use.
 
 .. code-block:: python
@@ -168,5 +168,54 @@ App with model
 Train a model
 -------------
 
-.. Important::  When working with pytorch, you must save your model with ``state_dict`` as explained `here <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended>`_
+.. Important::  When working with pytorch, you must save your model with ``state_dict`` as explained `here <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended>`_, an reload it inside the app.
 
+You can build the model of your choice, from embeddings or not, and load it in your app.
+
+.. code-block:: python
+
+    """
+    Module that provide a classifier template to train a model on embeddings.
+    With use the pathogen vs human dataset as an example. The embedding of 100k proteins come 
+    from the protBert model.
+    The model is built with pytorch_ligthning, a wrapper on top of 
+    pytorch (similar to keras with tensorflow)
+    Feel feel to build you own model if you want to build a more complex one
+    """
+
+    import numpy as np
+    from biodatasets import list_datasets, load_dataset
+    from deepchain.models import MLP
+    from deepchain.models.utils import confusion_matrix_plot, model_evaluation_accuracy
+    from sklearn.model_selection import train_test_split
+
+    # Load embedding and target dataset
+    pathogen = load_dataset("pathogen")
+    _, y = pathogen.to_npy_arrays(input_names=["sequence"], target_names=["class"])
+    embeddings = pathogen.get_embeddings("sequence", "protbert", "cls")
+
+    x_train, x_test, y_train, y_test = train_test_split(embeddings, y[0], test_size=0.3)
+
+    # Build a multi-layer-perceptron on top of embedding
+
+    # The fit method can handle all the arguments available in the
+    # 'trainer' class of pytorch lightening :
+    #               https://pytorch-lightning.readthedocs.io/en/latest/common/trainer.html
+    # Example arguments:
+    # * specifies all GPUs regardless of its availability :
+    #               Trainer(gpus=-1, auto_select_gpus=False, max_epochs=20)
+
+    # Input variables for MLP
+    n_class = len(np.unique(y_train))
+    input_shape = x_train.shape[1]
+
+    mlp = MLP(input_shape=input_shape, n_class=n_class)
+    mlp.fit(x_train, y_train, epochs=5)
+    mlp.save("model.pt") # built-in method to save state_dict
+
+    # Model evaluation
+    y_pred = mlp(x_test).squeeze().detach().numpy()
+    model_evaluation_accuracy(y_test, y_pred)
+
+    # Plot confusion matrix
+    confusion_matrix_plot(y_test, (y_pred > 0.5).astype(int), ["0", "1"])

@@ -51,7 +51,7 @@ exclude_patterns = []
 html_theme = "sphinx_book_theme"
 
 html_theme_options = {
-    # "theme_dev_mode": True,
+    "theme_dev_mode": True,
     "path_to_docs": "docs",
     "repository_url": "https://github.com/DeepChainBio/deep-chain-apps",
     # "repository_branch": "gh-pages",  # For testing
@@ -73,7 +73,8 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
-html_title = f"deepchain-apps v{release}"
+# html_title = f"deepchain-apps v{release}"
+html_title = f"deepchain-apps"
 html_logo = "_static/instadeep-small.png"
 
 extensions = [
