@@ -1,7 +1,7 @@
 Installation
 ============
 
-`deepchain-apps` can be installed in Python 3.7 and external python dependencies are mainly defined in `requirements`_.
+``deepchain-apps`` can be installed in Python 3.7 and external python dependencies are mainly defined in `requirements`_.
 There are multiple different methods to install Bio-transformers:
 
 1. Create a virtual environment using `Anaconda`_ / `Miniconda`_ (**recommended**).

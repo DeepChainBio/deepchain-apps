@@ -18,19 +18,18 @@ DeepChainBio repository
 ------------------------
 The Github `DeepChainBio <https://github.com/DeepChainBio>`_  is hosting 3 python packages to help building apps.
 
-   - `bio-transformers <https://github.com/DeepChainBio/bio-transformers>`_: This package is a wrapper on top of state of the art protein design models.
-   - `bio-datasets <https://github.com/DeepChainBio/bio-datasets>`_ allows to download protein seqeunces datasets and pre-computed embeddings.
-   - `deep-chain-apps <https://github.com/DeepChainBio/deep-chain-apps>`_ provide an Apps template.
+   * `bio-transformers <https://github.com/DeepChainBio/bio-transformers>`_: This package is a wrapper on top of state of the art protein design models.
+   * `bio-datasets <https://github.com/DeepChainBio/bio-datasets>`_ allows to download protein seqeunces datasets and pre-computed embeddings.
+   * `deep-chain-apps <https://github.com/DeepChainBio/deep-chain-apps>`_ provide an Apps template.
 
 
-.. image:: deepchainhub.png
-   
+.. image:: images/deepchainhub.png
+
 Tables
 ======
-
 .. toctree::
    :hidden:
-   :maxdepth: 2
+   :maxdepth: -1
    :caption: Getting Started
 
    getting_started/install.rst
@@ -38,15 +37,15 @@ Tables
 
 .. toctree::
    :hidden:
-   :maxdepth: 0
+   :maxdepth: -1
    :caption: Documentation
 
    documentation/deepchainapps.rst
 
 .. toctree::
    :hidden:
-   :maxdepth: 0
+   :maxdepth: -1
    :caption: Tutorial
 
-   tutorial/cli
-   tutorial/apps_building
+   tutorial/cli.rst
+   tutorial/apps_building.rst
