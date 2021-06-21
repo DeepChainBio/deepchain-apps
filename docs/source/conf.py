@@ -75,7 +75,7 @@ html_theme_options = {
 html_static_path = ["_static"]
 # html_title = f"deepchain-apps v{release}"
 html_title = f"deepchain-apps"
-html_logo = "_static/instadeep-small.png"
+html_logo = "_static/logo-wide.png"
 
 extensions = [
     "sphinx.ext.autodoc",  # autodoc for API
