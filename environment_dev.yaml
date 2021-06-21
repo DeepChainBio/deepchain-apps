@@ -17,3 +17,4 @@ dependencies:
     - sphinx_tabs==2.1.0
     - m2r2==0.2.7
     - myst-parser
+    - myst-nb
