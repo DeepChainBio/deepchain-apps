@@ -11,7 +11,7 @@ dependencies:
     - scikit-learn>=0.22.0
     - torch>=1.7.0
     - tqdm>=4.60.0
-    - sphinx==3.5.1
+    - sphinx
     - sphinx-notfound-page==0.6
     - sphinx-book-theme
     - sphinx_tabs==2.1.0
