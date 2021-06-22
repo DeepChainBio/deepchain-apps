@@ -1,7 +1,7 @@
 App structure
 =============
 
-When creating an app with the CLI, you will download the current github folder with the following structure.
+When creating an app with the CLI, you will download the current GitHub folder with the following structure.
 
 .. important:: The main class must be named ``App`` in ``app.py`` ins the src folder.
 
@@ -11,14 +11,14 @@ When creating an app with the CLI, you will download the current github folder w
     ├── __init__.py
     ├── checkpoint
     │   ├── __init__.py
-    │   └── model.pt: Optionnal # optional: model to be used in app must be placed there
+    │   └── model.pt: Optionnal # optional: model to be used in the app must be placed there
     ├── examples
     │   ├── app_with_checkpoint.py # example: app example with checkpoint
     │   └── torch_classifier.py # example: show how to train a neural network with pre-trained embeddings
     └── src
         ├── DESC.md # Desciption file of the application, feel free to put a maximum of information.
         ├── __init__.py
-        ├── app.py # main application script. Main class must be named App.
+        ├── app.py # main application script. The main class must be named App.
         └── model.py: Optional # file to register the models you use in app.py.
         └── tags.json # file to register the tags on the hub.
 
@@ -36,7 +36,7 @@ For your app to be visible and well documented, tags should be filled to precise
 
 Special method in apps
 ----------------------
-Every apps inherit from the ``DeepChainApp`` class that provide some special method. This method are useful for loading extra files
+Every apps inherit from the ``DeepChainApp`` class that provides some special method. This method is useful for loading extra files
 in your app. 
 
 * Use method ``get_checkpoint_path(__file__)`` to get the absolute path of the file in the ``checkpoint`` folder.
@@ -45,4 +45,4 @@ in your app.
 DeepchainHub 
 ------------
 
-All the applications that have been released publicly can be found on the `hub <https://app.deepchain.bio/hub/apps>`_ as describred in this `section <https://deepchain-apps.readthedocs.io/en/latest/documentation/deepchain.html>`_
+All the applications that have been released publicly can be found on the `hub <https://app.deepchain.bio/hub/apps>`_ as described in this `section <https://deepchain-apps.readthedocs.io/en/latest/documentation/deepchain.html>`_

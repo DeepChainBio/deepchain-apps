@@ -1,6 +1,6 @@
 # Logging
 
-When running deepchain-apps, printed messages are entirely controles by deepchain-apps code.
+When running deepchain-apps, printed messages are entirely controlled by deepchain-apps code.
 The log level controls which types of log messages would be printed.
 
 deepchain-apps uses the Python module ``logging` <https://docs.python.org/3/library/logging.html>`_ to log the messages. The log level is controlled by the environment variable DEEPCHAIN_LOG_LEVEL. The levels are given in the table below. The default level is “2”.

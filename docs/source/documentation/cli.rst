@@ -41,7 +41,7 @@ The CLI provides 5 main commands:
 
         deepchain apps --infos
     
-    .. important::  The apps show with this command are not synchronize with deepchain-hub.
+    .. important::  The apps show with this command are not synchronized with deepchain-hub.
     
     * Remove all local apps (files & config):
     

@@ -168,19 +168,18 @@ App with model
 Train a model
 -------------
 
-.. Important::  When working with pytorch, you must save your model with ``state_dict`` as explained `here <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended>`_, an reload it inside the app.
+.. Important::  When working with pytorch, you must save your model with ``state_dict`` as explained `here <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended>`_, and reload it inside the app.
 
 You can build the model of your choice, from embeddings or not, and load it in your app.
 
 .. code-block:: python
 
     """
-    Module that provide a classifier template to train a model on embeddings.
-    With use the pathogen vs human dataset as an example. The embedding of 100k proteins come 
-    from the protBert model.
+    A module that provides a classifier template to train a model on embeddings.
+    With using the pathogen vs human dataset as an example. The embedding of 100k proteins come from the protBert model.
     The model is built with pytorch_ligthning, a wrapper on top of 
     pytorch (similar to keras with tensorflow)
-    Feel feel to build you own model if you want to build a more complex one
+    Feel feel to build your own model if you want to build a more complex one
     """
 
     import numpy as np
