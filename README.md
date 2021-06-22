@@ -8,6 +8,7 @@
 [![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
+[![Documentation Status](https://readthedocs.org/projects/deepchain-apps/badge/?version=latest)](https://deepchain-apps.readthedocs.io/en/latest/?badge=latest)
 
 <details><summary>Table of contents</summary>
 
@@ -30,6 +31,8 @@ DeepChain apps is a collaborative framework that allows the user to create score
 
 This github is hosting a template for creating a personal application to deploy on deepchain.bio. The main [deepchain-apps](https://pypi.org/project/deepchain-apps/) package can be found on pypi.
 To leverage the apps capability, take a look at the [bio-transformers](https://pypi.org/project/bio-transformers/) and [bio-datasets](https://pypi.org/project/bio-datasets) package.
+
+📕 Please find the documentation [here](https://deepchain-apps.readthedocs.io/en/latest/index.html).
 
 ## Installation
 It is recommended to work with conda environnements in order to manage the specific dependencies of the package.
