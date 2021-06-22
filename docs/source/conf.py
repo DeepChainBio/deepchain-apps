@@ -22,8 +22,8 @@ sys.path.insert(0, os.path.abspath("../.."))
 # -- Project information -----------------------------------------------------
 
 project = "deepchain-apps"
-copyright = str(datetime.now().year) + ", instadeep"
-author = "instadeep"
+copyright = str(datetime.now().year) + ", InstaDeep"
+author = "InstaDeep"
 
 # The full version, including alpha/beta/rc tags
 release = "0.1.8"
