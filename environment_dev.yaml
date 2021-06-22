@@ -11,10 +11,10 @@ dependencies:
     - scikit-learn>=0.22.0
     - torch>=1.7.0
     - tqdm>=4.60.0
-    - sphinx
+    - sphinx==4.0.2
     - sphinx-notfound-page==0.6
-    - sphinx-book-theme
+    - sphinx-book-theme==0.1.0
     - sphinx_tabs==2.1.0
     - m2r2==0.2.7
-    - myst-parser
-    - myst-nb
+    - myst-parser==0.15.1
+    - myst-nb==0.12.3
