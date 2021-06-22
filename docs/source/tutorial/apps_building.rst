@@ -28,7 +28,7 @@ The app below describes the general framework to build an app.
         * compute whatever score of interest based on protein sequence
         """
 
-        def __init__(self, device: str = "cuda:0"):
+        def __init__(self, device: str = "cpu):
             self._device = device
 
             # TODO: fill _checkpoint_filename if needed
@@ -133,7 +133,8 @@ App with model
 
         def __init__(self, device: str = "cuda:0"):
             self._device = device
-            self.transformer = BioTransformers(backend="protbert", device=device)
+            self.num_gpus = 1 if device == "cpu" else 1
+            self.transformer = BioTransformers(backend="protbert", num_gpus=self.num_gpus)
             # Make sure to put your checkpoint file in your_app/checkpoint folder
             self._checkpoint_filename: Optional[str] = "model.pt"
             # build your model
