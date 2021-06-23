@@ -1,6 +1,5 @@
 """Template file to develop personal app
-WARNINGS: if you run the app locally and don't have a GPU
-          you should choose device='cpu'
+WARNINGS: if you run the app locally and don't have a GPU you should choose device='cpu'
 """
 
 from typing import Dict, List, Optional
