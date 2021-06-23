@@ -27,7 +27,9 @@ class App(DeepChainApp):
 
     def __init__(self, device: str = "cuda:0"):
         self._device = device
-        self.transformer = BioTransformers(backend="protbert", device=device)
+        self.num_gpus = 0 if device == "cpu" else 1
+        self.transformer = BioTransformers(backend="protbert", num_gpus=self.num_gpus)
+        
         # Make sure to put your checkpoint file in your_app/checkpoint folder
         self._checkpoint_filename: Optional[str] = "model.pt"
         # build your model
