@@ -8,17 +8,16 @@
 -  can acquire new or improved functions that can be used to find new medicines and vaccines
 
 <p align="center">
-  <img width="50%" src="./docs/source/images/sequence_protein.jpeg">
+  <img width="50%" src="../_images/sequence_protein.jpeg">
 </p>
 
-./.docs/source/_static/
 
 ## What is DeepChain™ ?
 
 DeepChain™ optimises the design of new protein molecules to attain novel activity, behavior, or purpose, and to advance basic understanding of protein function. DeepChain™ at the crossroads of AI and Biology.
 
 <p align="center">
-  <img width="80%" src="./docs/source/images/images/deepchain_pg.jpeg">
+  <img width="80%" src="../_images/deepchain_pg.jpeg">
 </p>
 
 ## DeepChain™ MODULES & FEATURES
@@ -41,14 +40,14 @@ Create a free account on [deepchain](https://deepchain.bio) in 2 minutes to disc
 In general, protein design is a multi-objective optimisation challenge.
 
 <p align="center">
-  <img width="50%" src="./docs/source/images/images/multi_objective.jpeg">
+  <img width="50%" src="../_images/multi_objective.jpeg">
 </p>
 
 DeepChain apps allows you to build your own custom score that you can optimize during the process.
 
 
 <p align="center">
-  <img width="80%" src="./docs/source/images/images/pipeline.jpeg">
+  <img width="80%" src="../_images/pipeline.jpeg">
 </p>
 
 ## How to use my app in DeepChain™?
@@ -57,7 +56,7 @@ In the **AI Designer**, when launching an experiment, you can select multiple ap
 
 
 <p align="center">
-  <img width="80%" src="./docs/source/images/images/deepchain_score.jpeg">
+  <img width="80%" src="../_images/deepchain_score.jpeg">
 </p>
 
 ## Deepchain hub
@@ -71,5 +70,5 @@ The hub allows having a look at the work of other researchers in biology. This i
 To deploy your application on deepchain with the `cli`, you need to generate a personal access token in the settings part.
 
 <p align="center">
-  <img width="80%" src="./docs/source/images/images/login.jpeg">
+  <img width="80%" src="../_images/login.jpeg">
 </p
