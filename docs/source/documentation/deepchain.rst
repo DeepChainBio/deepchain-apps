@@ -47,11 +47,18 @@ In general, protein design is a multi-objective optimisation challenge.
     :width: 400px
     :align: center
 
-DeepChain apps allows you to build your own custom score that you can optimize during the process.
+
+Deepchain apps allows you to build your own custom score that you can optimize during the process.
+
 
 .. image:: ../images/pipeline.jpeg
     :width: 800px
     :align: center
+
+
+If you want to know more about how to create, build and deploy, have a look at the `quickstart <https://deepchain-apps.readthedocs.io/en/latest/getting_started/quick_start.html>`_
+and the `apps basic <https://deepchain-apps.readthedocs.io/en/latest/tutorial/apps_building.html>`_ section.
+
 
 How to use my app in DeepChain™?
 --------------------------------

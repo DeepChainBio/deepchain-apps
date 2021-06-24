@@ -2,6 +2,13 @@
 Apps basic
 ==========
 
+As explained `here <https://deepchain-apps.readthedocs.io/en/latest/documentation/deepchainapps.html>`_, an app has the stucture of a python package.
+Every files should be placed in the ``src`` or ``checkpoint`` folder. 
+
+The app should at least contains an ``app.py`` file with an ``App`` class in the ``src`` folder. The provided template is when creating an app 
+is a starting point. Note that the ``compute_scores`` function receive a list of sequences in input
+
+
 Template
 --------
 
@@ -28,7 +35,7 @@ The app below describes the general framework to build an app.
         * compute whatever score of interest based on protein sequence
         """
 
-        def __init__(self, device: str = "cpu):
+        def __init__(self, device: str = "cpu"):
             self._device = device
 
             # TODO: fill _checkpoint_filename if needed

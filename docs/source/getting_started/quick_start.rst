@@ -30,12 +30,12 @@ This command will download the template hosting on github in the folder **myappl
 
     >> deepchain apps --public
 
-    ----------------------------------------------------------------
-    APP                                        USERNAME             
-    ----------------------------------------------------------------
-    FullInfluenzaBinding                 k.eloff@hotmail.co.za      
-    OntologyPredict                    stj.grimbly@instadeep.com    
-    DiseaseRiskApp                     jb.sevestre@instadeep.com    
+    ----------------------------------------------
+    APP                                 USERNAME             
+    ----------------------------------------------
+    FullInfluenzaBinding                 k.eloff     
+    OntologyPredict                    stj.grimbly    
+    DiseaseRiskApp                     jb.sevestre  
   
 
 
@@ -48,6 +48,11 @@ Then download and modifies it.
 .. code-block:: bash
 
     deepchain download user.name/appname myapplication
+
+
+After creating or downloading an app, you can build your own scorer function as explained `here <https://deepchain-apps.readthedocs.io/en/latest/tutorial/apps_building.html>`_.
+
+This `section <https://deepchain-apps.readthedocs.io/en/latest/documentation/deepchain.html>`_ provide you some insights on how to use your app in DeepChain™.
 
 4. Finally, you can deploy your application on deepchain. After validation, it will be available on the deepchain public `hub <https://app.deepchain.bio/hub/apps>`_
 
