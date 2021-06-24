@@ -11,7 +11,7 @@ Proteins...
 -  can acquire new or improved functions that can be used to find new medicines and vaccines
 
 .. image:: ../images/sequence_protein.jpeg
-    :width: 400px
+    :width: 800px
     :align: center
 
 
@@ -21,7 +21,7 @@ What is DeepChain™ ?
 DeepChain™ optimises the design of new protein molecules to attain novel activity, behavior, or purpose, and to advance basic understanding of protein function. DeepChain™ at the crossroads of AI and Biology.
 
 .. image:: ../images/deepchain_pg.jpeg
-    :width: 400px
+    :width: 800px
     :align: center
     
 
@@ -36,7 +36,7 @@ DeepChain™ MODULES & FEATURES
 
 - **Jupyter Notebook**: Conduct personalised analyses of all your structures in hosted jupyter notebooks, with the help of any Python or R library
 
-.. tip:: Create a free account on [deepchain](https://deepchain.bio) in 2 minutes to discover protein design features.
+.. tip:: Create a free account on `deepchain <https://deepchain.bio>`_ in 2 minutes to discover protein design features.
 
 DeepChain apps for protein design
 ---------------------------------
@@ -50,7 +50,7 @@ In general, protein design is a multi-objective optimisation challenge.
 DeepChain apps allows you to build your own custom score that you can optimize during the process.
 
 .. image:: ../images/pipeline.jpeg
-    :width: 400px
+    :width: 800px
     :align: center
 
 How to use my app in DeepChain™?
@@ -59,7 +59,7 @@ How to use my app in DeepChain™?
 In the **AI Designer**, when launching an experiment, you can select multiple apps and scores to guide the optimization process.
 
 .. image:: ../images/deepchain_score.jpeg
-    :width: 400px
+    :width: 800px
     :align: center
 
 Deepchain hub
@@ -68,7 +68,7 @@ Deepchain hub
 The hub allows having a look at the work of other researchers in biology. This is the place where you can find public apps.
 
 .. image:: ../images/deepchainhub.jpeg
-    :width: 400px
+    :width: 800px
     :align: center
 
 Deepchain personnal account
@@ -77,5 +77,5 @@ Deepchain personnal account
 To deploy your application on deepchain with the `cli`, you need to generate a personal access token in the settings part.
 
 .. image:: ../images/login.jpeg
-    :width: 400px
+    :width: 800px
     :align: center
