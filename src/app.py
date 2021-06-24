@@ -1,6 +1,5 @@
 """Template file to develop personal app
-WARNINGS: if you run the app locally and don't have a GPU
-          you should choose device='cpu'
+WARNINGS: if you run the app locally and don't have a GPU you should choose device='cpu'
 """
 
 from typing import Dict, List, Optional
@@ -25,7 +24,8 @@ class App(DeepChainApp):
 
     def __init__(self, device: str = "cuda:0"):
         self._device = device
-        self.transformer = BioTransformers(backend="protbert", device=device)
+        self.num_gpus = 0 if device == "cpu" else 1
+        self.transformer = BioTransformers(backend="protbert", num_gpus=self.num_gpus)
 
         # TODO: fill _checkpoint_filename if needed
         # Make sure to put your checkpoint file in your_app/checkpoint folder
@@ -64,7 +64,7 @@ class App(DeepChainApp):
                     * element of list is protein score
                     * key of dict are score_names
         """
-        # TODO : Fill with you own score functio
+        # TODO : Fill with you own score function
         loglikelihoods = self.transformer.compute_loglikelihood(sequences)
         log_list = [{self.score_names()[0]: log} for log in loglikelihoods]
 
