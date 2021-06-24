@@ -173,8 +173,8 @@ App with model
 
             return prob_list
 
-Train a model
--------------
+Training a model
+----------------
 
 .. Important::  When working with pytorch, you must save your model with ``state_dict`` as explained `here <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended>`_, and reload it inside the app.
 

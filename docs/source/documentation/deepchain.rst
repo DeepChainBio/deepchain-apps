@@ -78,7 +78,7 @@ The hub allows having a look at the work of other researchers in biology. This i
     :width: 800px
     :align: center
 
-Deepchain personnal account
+Deepchain personal account
 ---------------------------
 
 To deploy your application on deepchain with the `cli`, you need to generate a personal access token in the settings part.
