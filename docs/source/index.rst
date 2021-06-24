@@ -36,7 +36,7 @@ The Github `DeepChainBio <https://github.com/DeepChainBio>`_  is hosting 3 pytho
 
    documentation/deepchainapps.rst
    documentation/cli.rst
-   documentation/deepchain
+   documentation/deepchain.rst
    documentation/logging
 
 .. toctree::
